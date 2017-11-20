@@ -14,7 +14,7 @@ public class Csv {
 	private static ArrayList <ArrayList <String>> arraySortBySignal = new ArrayList<ArrayList <String>>();
 	private static ArrayList <ArrayList <String>> arraySortByTime = new ArrayList<ArrayList <String>>();
 	private static File folder = new File("C:/Users/InnaPC/Desktop/New folder/Lenovo");
-	private static File[] files = folder.listFiles();
+	private static File[] filesr = folder.listFiles();
 
 	public static void readFile (String fileName){
 		// try read from the file
