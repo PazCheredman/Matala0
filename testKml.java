@@ -1,4 +1,4 @@
-package version6;
+package version8;
 
 import java.io.BufferedReader;
 
@@ -23,12 +23,15 @@ public class testKml {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
-		readCsvFile("C:\\Users\\InnaPC\\Desktop\\munhe\\Lenovo\\gmon.csv");
+		readCsvFile("C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\gmon.csv");
 	}
 
-	//reads from the final csv file and turns it into kml
+	/**
+	 * 
+	 * try to read from the final csv file and turns it into kml with timestamp
+	 * @param fileName
+	 */
 	public static void readCsvFile (String fileName){
-		// try read from the file
 		final  Kml kml = new Kml();
 		de.micromata.opengis.kml.v_2_2_0.Document doc = kml.createAndSetDocument();
 		try {
@@ -73,7 +76,7 @@ public class testKml {
 			str = br.readLine();
 			br.close();
 			fr.close();
-			kml.marshal(new File("C:\\Users\\InnaPC\\Desktop\\munhe\\Lenovo\\kml.kml"));
+			kml.marshal(new File("C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\kml.kml"));
 		}
 		catch(IOException ex) {
 			System.out.print("Error reading file\n" + ex);

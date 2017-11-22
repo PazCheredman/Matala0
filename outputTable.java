@@ -1,10 +1,13 @@
-package version6;
+package version8;
 
 import java.util.ArrayList;
 
 public class outputTable {
 
-	//this class represents output csv table builder 
+	/**
+	 * this class represents output csv table builder 
+	 */
+	
 	private ArrayList<outputRow> ls;
 	
 	public outputTable(){

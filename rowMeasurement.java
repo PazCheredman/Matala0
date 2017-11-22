@@ -1,11 +1,12 @@
-package version6;
+package version8;
 
 import java.io.IOException;
 import java.util.List;
 
 public class rowMeasurement {
-	//this class contains the parameters of csv table
-	
+	/**
+	 * this class contains the parameters of csv table
+	 */
 	
 	private  String Time;
 	private  String ID;

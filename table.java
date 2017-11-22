@@ -1,4 +1,6 @@
-package version6;
+package version8;
+
+
 import java.util.ArrayList;
 
 import java.util.Collections;
@@ -8,7 +10,9 @@ import version2.arrayRowMeasurement;
 
 public class table {
 	
-	//this class is the builder of table 
+	/**
+	 * this class is the builder of table 
+	 */
 	
 	private ArrayList<rowMeasurement> ls; 
 	
@@ -40,16 +44,4 @@ public class table {
 		Collections.sort(ls, new rowMeasurementComp());
 	}
 	
-	/*public static void main (String [] args){
-		rowMes row= new rowMes();
-		rowMes row1= new rowMes();
-
-		row.addAll("1","2", "3","4", "5", "6", "7", "8", "9");
-		row1.addAll("0","2", "3","7", "5", "6", "7", "8", "9");
-		table a= new table();
-		a.add(row);
-		a.add(row1);
-		System.out.println(a);
-	}
-	*/
 }

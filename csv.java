@@ -1,4 +1,4 @@
-package version6;
+package version8;
 
 import java.io.FileWriter;
 import java.io.File;
@@ -14,13 +14,17 @@ public class csv {
 	private table inTab;
 	private outputTable outTab;
 
-	//enter path name here
+	/**
+	 * enter path name here
+	 */
 	public void read(){
-		readFolder rf= new readFolder("C:\\Users\\InnaPC\\Desktop\\munhe\\Lenovo");
+		readFolder rf= new readFolder("C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10");
 		inTab=rf.getTables();
 	}
 
-	//Processing data and creating new output table
+	/**
+	 * Processing data and creating new output table
+	 */
 	public void process(){
 		outTab = new outputTable();
 		inTab.sort();
@@ -49,11 +53,18 @@ public class csv {
 		}
 	}
 
-	//writing new csv table
+	/**
+	 * writing new csv table
+	 * @throws IOException
+	 */
 	public void write() throws IOException{ 
-		// enter path name here format: "pathAddredd\\filename.csv"
-		FileWriter writer = new FileWriter("C:\\Users\\InnaPC\\Desktop\\munhe\\Lenovo\\gmon.csv");
-		//write header line
+		/**
+		 *  enter path name here format: "pathAddredd\\filename.csv"
+		 */
+		FileWriter writer = new FileWriter("C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\gmon.csv");
+		/**
+		 * write header line
+		 */
 		writer.write("Time"+","+"ID"+","+"Lat"+","+"Lon"+","+"Alt"+","+"#WiFi networks"+
 				","+"SSID1"+","+"MAC1"+","+"Frequncy1"+","+"Signal1"+
 				","+"SSID2"+","+"MAC2"+","+"Frequncy2"+","+"Signal2"+

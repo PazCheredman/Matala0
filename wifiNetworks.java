@@ -1,9 +1,11 @@
-package version6;
+package version8;
 
 public class wifiNetworks {
 	
-	//class contains 4 parameters for wifi network: ssid, mac, frequncy, signal
 	
+	/**
+	 * class contains 4 parameters for wifi network: ssid, mac, frequncy, signal
+	 */
 	
 	private String ssid=new String(); 
 	private String mac=new String();

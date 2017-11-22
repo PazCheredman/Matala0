@@ -1,10 +1,13 @@
-package version6;
+package version8;
 
 import java.util.Comparator;
 
 public class rowMeasurementComp implements Comparator<rowMeasurement>{
 
-	//this class is a comparator of time, id, lat, lon, alt, signal
+/**
+ * 	this class is a comparator of time, id, lat, lon, alt, signal
+ */
+	
 	@Override
 	public int compare(rowMeasurement o1, rowMeasurement o2) {
 		//compare time 
