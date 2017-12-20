@@ -10,7 +10,8 @@ Ex0+Ex1: run in this order:
 Ex2: run class "main"- follow the instruction printed, it will provide you all the information needed.
 
 	p.s.
-	notice that in Ex2 we wrote specific paths so make sure to change it so it 	fits your computer and your folders.
+	notice that in Ex2 we wrote specific paths so make sure to change it so it
+	fits your computer and your folders.
 
 Thank you for checking our project. 
 Paz & Inna. 
