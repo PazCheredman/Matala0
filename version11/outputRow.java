@@ -112,5 +112,13 @@ public class outputRow {
 	public String getMac(int index){
 		return wifi[index].getMac();
 	}
+	
+	public String getId(){
+		return ID;
+	}
+	
+	public String getTime(){
+		return Time;
+	}
 
 }

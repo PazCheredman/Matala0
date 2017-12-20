@@ -54,19 +54,4 @@ public class Algorithm1 {
 	public double algoWeight1(double signal) {
 		return 1 / (signal * signal);
 	}
-/*
-	public ArrayList<String> searchByRadious(double lat, double lon, double alt, double rad) throws IOException {
-		locationSignal current = new locationSignal();
-		current.setAll(lat, lon, alt, 0);
-		locationSignal loc = new locationSignal();
-		ArrayList<String> output = new ArrayList();
-		for (int i = 0; i < macSignals.size(); i++) {
-			loc = algorithem1(macSignals.getMac(i));
-			if (loc.dist(current) <= rad) {
-				output.add(macSignals.getMac(i));
-			}
-		}
-		return output;
-	}
-*/
 }

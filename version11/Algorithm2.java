@@ -68,35 +68,5 @@ public class Algorithm2 {
 			return null;
 		}
 	}
-	/**
-	 * gets the signal from our csv that matches the mac we received from the client and the signal he entered.
-	 * calculation: calculating the difference between them both and then calculating theirs average  = 1/difference^0.4 * signal received^2
-	 * @param sig
-	 * @param sigInput
-	 * @return
-	 */
-
-	/*
-	public double algoWeight2(double sig, double sigInput){
-		double diff;
-		if(sig == sigInput){
-			diff = 100;
-		}
-		else{
-			diff = Math.max(Math.abs(sigInput-sig),3);
-		}
-		return 1/(Math.pow(diff,0.4 )*Math.pow(sigInput,2 ));
-
-	}
-
-	//אמור להיות החישוב הסופי יחד עם האלגוריתם הראשון
-	public void algoSum2(){
-
-	}
-
-
-	 */
-
-
 
 }

@@ -95,7 +95,7 @@ public class csv {
 
 	public static void main(String [] args) throws IOException{
 		//please enter folder that contains wiggleWifi files.
-		System.out.println("please enter path of csv file:"); // C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\creategmon
+		System.out.println("please enter path of csv file:"); // C:\\Users\\InnaPC\\Desktop\\munhe\\gmon
 		Scanner fileName= new Scanner(System.in);
 		String insertFileName= fileName.nextLine();
 		tab.read(insertFileName);
