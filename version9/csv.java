@@ -1,4 +1,4 @@
-package version8;
+package version9;
 
 import java.io.FileWriter;
 import java.io.File;
@@ -96,5 +96,6 @@ public class csv {
 		tab.read();
 		tab.process();
 		tab.write();
+		System.out.println("go to folder C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10 to see the files");
 	}
 }

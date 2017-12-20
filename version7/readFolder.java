@@ -1,5 +1,4 @@
-package version8;
-
+package version7;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,39 +6,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javax.activation.FileDataSource;
-import version8.rowMeasurement;
+
+import version2.arrayOfArrayRow;
+import version2.arrayRowMeasurement;
+import version2.rowMeasurement;
 
 public class readFolder {
 	
 	private table tables;
 	
-	/**
-	 * fileName is a folder name that contains the csv files.
-	 * @param directory
-	 */
-	
+	//fileName is a folder name that contains the csv files.
 	public readFolder(String directory){
 		File folder=new File(directory);
 		tables=new table();
 		File[] files = folder.listFiles();
 		for(int i=0; i<files.length; i++){
 			directory = files[i].getPath();
-			if(directory.contains(".csv"))	{
+			if(directory.contains(".csv")==true)	{
 				readFile(directory);
 			}
 			continue;
 		}		
 	}
 	
-	/**
-	 * read file, parse row and add it to table
-	 * @param fileName
-	 */
+	//read file, parse row and add it to table
 	private void readFile (String fileName){
-		/**
-		 *  try read from the file
-		 */
+		// try read from the file
 		try {
 			FileReader fr = new FileReader(fileName);
 			BufferedReader br = new BufferedReader(fr);
@@ -53,14 +47,16 @@ public class readFolder {
 			str = br.readLine();
 			while(str != null){
 				List <String> tempfilesArray= Arrays.asList(str.split(","));
-				
-				try {
-					rowMeasurement row= new rowMeasurement(tempfilesArray,id);
+				//pay attention to change version number 
+				version7.rowMeasurement row= new version7.rowMeasurement();
+				boolean result= row.setAll(tempfilesArray.get(3), id,
+						tempfilesArray.get(6), 	tempfilesArray.get(7),
+						tempfilesArray.get(8), 	tempfilesArray.get(1),
+						tempfilesArray.get(0), 	tempfilesArray.get(4),
+						tempfilesArray.get(5));
+				if(result==true){
 					tables.add(row);
-				} catch (ErrorInInputEception e) {
-					e.printStackTrace();
 				}
-
 				str = br.readLine();
 
 			}
@@ -76,5 +72,12 @@ public class readFolder {
 	public table getTables() {
 		return tables;
 	}
+
+	/*
+	private arrayRowMeasurement organizeCsv(arrayRowMeasurement arr){
+		arrayRowMeasurement temp = new arrayRowMeasurement();
+		temp.addAll(arr.getTime(), arr.getID(), arr.getLAT(), arr.getLON(), arr.getALT(), arr.getSSID(), arr.getMAC(), arr.getFrequncy(), arr.getSIGNAL());
+		return temp;
+	}*/
 
 }

@@ -1,15 +1,12 @@
-package version8;
+package version6;
 
 public class outputRow {
 
-	/**
-	 * this is output row in organized csv table builder
-	 */
+	// this is output row in organized csv table builder
 	
 	
 	private String Time,ID;
-	private double Lat, Lon, Alt;	
-	private wifiNetworks wifi [];
+	private double Lat, Lon, Alt;	private wifiNetworks wifi [];
 
 	private int wifiCount;
 	
@@ -52,5 +49,6 @@ public class outputRow {
 	public int getWifiCount() {
 		return wifiCount;
 	}
+
 	
 }

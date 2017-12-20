@@ -1,16 +1,14 @@
-package version8;
+package version7;
 
 public class outputRow {
 
-	/**
-	 * this is output row in organized csv table builder
-	 */
+	
+	// this is output row in organized csv table builder
 	
 	
 	private String Time,ID;
-	private double Lat, Lon, Alt;	
+	private double Lat, Lon, Alt;
 	private wifiNetworks wifi [];
-
 	private int wifiCount;
 	
 	public outputRow(){
@@ -21,6 +19,8 @@ public class outputRow {
 		}
 	}
 	
+	//this function is the problem!!!!!! 
+	//it's supposed to set all the parameters 
 	public void addWifi(String ssid, String mac, double frequncy,double signal){
 		wifi[wifiCount].setSsid(ssid);
 		wifi[wifiCount].setMac(mac);

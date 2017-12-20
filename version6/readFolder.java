@@ -1,5 +1,4 @@
-package version8;
-
+package version6;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,17 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.activation.FileDataSource;
-import version8.rowMeasurement;
+import version6.rowMeasurement;
 
 public class readFolder {
 	
 	private table tables;
 	
-	/**
-	 * fileName is a folder name that contains the csv files.
-	 * @param directory
-	 */
-	
+	//fileName is a folder name that contains the csv files.
 	public readFolder(String directory){
 		File folder=new File(directory);
 		tables=new table();
@@ -32,14 +27,9 @@ public class readFolder {
 		}		
 	}
 	
-	/**
-	 * read file, parse row and add it to table
-	 * @param fileName
-	 */
+	//read file, parse row and add it to table
 	private void readFile (String fileName){
-		/**
-		 *  try read from the file
-		 */
+		// try read from the file
 		try {
 			FileReader fr = new FileReader(fileName);
 			BufferedReader br = new BufferedReader(fr);
@@ -76,5 +66,12 @@ public class readFolder {
 	public table getTables() {
 		return tables;
 	}
+
+	/*
+	private arrayRowMeasurement organizeCsv(arrayRowMeasurement arr){
+		arrayRowMeasurement temp = new arrayRowMeasurement();
+		temp.addAll(arr.getTime(), arr.getID(), arr.getLAT(), arr.getLON(), arr.getALT(), arr.getSSID(), arr.getMAC(), arr.getFrequncy(), arr.getSIGNAL());
+		return temp;
+	}*/
 
 }

@@ -1,4 +1,4 @@
-package version8;
+package version9;
 
 public class outputRow {
 
@@ -8,8 +8,7 @@ public class outputRow {
 	
 	
 	private String Time,ID;
-	private double Lat, Lon, Alt;	
-	private wifiNetworks wifi [];
+	private double Lat, Lon, Alt;	private wifiNetworks wifi [];
 
 	private int wifiCount;
 	
