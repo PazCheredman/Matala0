@@ -111,12 +111,24 @@ public class Algorithm3 {
 			int currTimeMinutes = Integer.parseInt(row.getTime().substring(14,16));
 			int currTimeSec = Integer.parseInt(row.getTime().substring(17,19));
 
-			if(currTimeHour >= timehourMin && currTimeHour <= timehourMax)
-				if(currTimeMinutes >= timemintuesMin &&  currTimeMinutes <= timeminutesMax)
-					if(currTimeSec >= timesecMin && currTimeSec <= timesecMax)
+			if(currTimeHour > timehourMin && currTimeHour < timehourMax)
+				timeExist.add(row);
+			else if(currTimeHour >= timehourMin && currTimeHour <= timehourMax)
+				if(currTimeMinutes > timemintuesMin &&  currTimeMinutes < timeminutesMax)
+					timeExist.add(row);
+				else if(currTimeMinutes >= timemintuesMin &&  currTimeMinutes <= timeminutesMax)
+					if(currTimeMinutes == timemintuesMin && currTimeMinutes < timeminutesMax){
+						if(currTimeSec >= timesecMin)
+							timeExist.add(row);
+					}
+					else if(currTimeMinutes >= timemintuesMin && currTimeMinutes == timeminutesMax){
+						if(currTimeSec <= timesecMax)
+							timeExist.add(row);
+					}
+					else if(currTimeSec >= timesecMin && currTimeSec <= timesecMax)
 						timeExist.add(row);
 		}
 		return timeExist;
 	}
-
+	
 }
