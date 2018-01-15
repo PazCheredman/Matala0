@@ -21,6 +21,30 @@ public class idFil extends JFrame {
 	private String csvPath;
 	private String wigglePath;
 	private JTextField textField;
+	
+	public boolean notFilter = false;
+	public String idCsv, idNotCsv;
+	
+
+	public String getIdCsv() {
+		return idCsv;
+	}
+
+	public void setIdCsv(String idCsv) {
+		this.idCsv = idCsv;
+	}
+
+	public String getIdNotCsv() {
+		return idNotCsv;
+	}
+
+	public void setIdNotCsv(String idNotCsv) {
+		this.idNotCsv = idNotCsv;
+	}
+
+	public void setnotFilter(boolean dataPath) {
+		this.notFilter = dataPath;
+	}
 
 	public String getCsvPath() {
 		return csvPath;
@@ -84,7 +108,20 @@ public class idFil extends JFrame {
 					if(!textField.getText().isEmpty()){
 						id=textField.getText();
 						main m= new main();
-						m.id(csvPath, id);
+						if(!notFilter){
+							String sub =csvPath.substring(0, csvPath.length()-9);
+							m.id(csvPath, id, false);
+							testKml kmlId= new testKml();	
+							kmlId.readCsvFile(sub, "id.csv");
+							setIdCsv(sub + "/id.csv");
+						}
+						else{
+							String sub =csvPath.substring(0, csvPath.length()-9);
+							m.id(csvPath, id, true);
+							testKml kmlId= new testKml();	
+							kmlId.readCsvFile(sub, "idNot.csv");
+							setIdNotCsv(sub + "/idNot.csv");
+						}
 					}
 					else{
 						JOptionPane.showMessageDialog(null, "ok input of textField button null");
