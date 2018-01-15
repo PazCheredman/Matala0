@@ -66,7 +66,7 @@ public class filters extends JFrame {
 
 		JLabel lblPleaseChooseWhich = new JLabel("please choose which filter you want to use.");
 		lblPleaseChooseWhich.setFont(new Font("Trebuchet MS", Font.PLAIN, 22));
-		lblPleaseChooseWhich.setBounds(49, 39, 641, 20);
+		lblPleaseChooseWhich.setBounds(49, 39, 641, 29);
 		contentPane.add(lblPleaseChooseWhich);
 
 		JLabel lblIfYouWant = new JLabel("if you want to filter by more than one filter, please choose the option \"more than one\"");
@@ -77,8 +77,11 @@ public class filters extends JFrame {
 		JButton btnRadious = new JButton("Radious");
 		btnRadious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-
+				radFil rad= new radFil();
+				rad.setCsvPath(csvPath);
+				rad.setWigPath(wigglePath);
+				contentPane.hide();
+				rad.setVisible(true);
 			}
 		});
 		btnRadious.setBounds(49, 181, 115, 29);
@@ -98,10 +101,27 @@ public class filters extends JFrame {
 		contentPane.add(btnTime);
 
 		JButton btnLocation = new JButton("Location");
+		btnLocation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				locFil loc= new locFil();
+				loc.setCsvPath(csvPath);
+				loc.setWigPath(wigglePath);
+				contentPane.hide();
+				loc.setVisible(true);
+			}
+		});
 		btnLocation.setBounds(476, 181, 115, 29);
 		contentPane.add(btnLocation);
 
 		JButton btnMoreThanOne = new JButton("more than one");
+		btnMoreThanOne.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				moreFil more= new moreFil();
+				more.setCsvPath(csvPath);
+				contentPane.hide();
+				more.setVisible(true);
+			}
+		});
 		btnMoreThanOne.setBounds(622, 181, 196, 29);
 		contentPane.add(btnMoreThanOne);
 
