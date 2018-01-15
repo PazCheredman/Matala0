@@ -5,22 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-import com.sun.istack.FragmentContentHandler;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import javax.swing.JMenu;
 import java.awt.Color;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
 
 public class openWindow {
 
@@ -35,9 +29,10 @@ public class openWindow {
 	private JTextField enterPathCsvKml;
 	private JButton btnOk;
 	private JButton button;
-	private boolean ok1=false,ok2=false;
+	private boolean ok1=false,ok2=false,result=false;
 	private JButton btnNext;
-
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -85,16 +80,18 @@ public class openWindow {
 		enterPathWiggle.setBounds(131, 149, 461, 42);
 		frame.getContentPane().add(enterPathWiggle);
 		enterPathWiggle.setColumns(10);
-		
+				
 		enterPathCsvKml = new JTextField();
 		enterPathCsvKml.setColumns(10);
 		enterPathCsvKml.setBounds(131, 259, 461, 42);
 		frame.getContentPane().add(enterPathCsvKml);
-
+		
+		//databases data = new databases(enterPathWiggle.getText(),enterPathCsvKml.getText());
+		
 		JLabel lblPleaseEnterPath = new JLabel("please enter path of folder that contains wiggle wifi application files:");
 		lblPleaseEnterPath.setForeground(Color.RED);
 		lblPleaseEnterPath.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPleaseEnterPath.setBounds(98, 97, 735, 36);
+		lblPleaseEnterPath.setBounds(90, 95, 735, 36);
 		frame.getContentPane().add(lblPleaseEnterPath);
 		
 		lblPleaseEnterPath_1 = new JLabel("please enter path of other folder that you want to put the csv and kml files in it");
@@ -129,6 +126,8 @@ public class openWindow {
 		button = new JButton("ok");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Thread t1=new Thread();
+				t1.start();
 				String path;
 				try{
 					if(!enterPathCsvKml.getText().isEmpty()){
@@ -136,11 +135,13 @@ public class openWindow {
 						ok2=true;
 					tableCsv.init(enterPathWiggle.getText(), enterPathCsvKml.getText(), "gmon.csv");
 					// JOptionPane.showMessageDialog(null, "ok input of CsvKml button");
+				//	C:\Users\Paz Cheredman\Desktop\munchex0\27.10\gmon
 					}
 					else{
 						JOptionPane.showMessageDialog(null, "ok input of CsvKml button null");
 
 					}
+					
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "error in input of CsvKml button");				}
 			}
@@ -153,10 +154,18 @@ public class openWindow {
 		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				result= tableCsv.okay(enterPathCsvKml.getText()+"\\"+ "gmon.csv");
 				try{
-					if(ok1 && ok2){
+					if(ok1 && ok2 && result){
+					//	System.out.println(enterPathCsvKml.getText()+"\\"+ "gmon.csv");
+					// 	System.out.println("ans="+result);
+						
 						nextFrame next= new nextFrame();
-						tableKml.initiliaze(enterPathCsvKml.getText(), "gmon.csv");
+				
+						tableKml.initiliaze(enterPathCsvKml.getText()+"\\", "gmon.csv");
+						next.setWigPath(enterPathWiggle.getText());
+						next.setCsvPath(enterPathCsvKml.getText()+"\\gmon.csv");
 						frame.dispose();
 						next.setVisible(true);
 					}
@@ -179,6 +188,10 @@ public class openWindow {
 		return enterPathCsvKml;
 	}
 	
+	public String getCsvKmlPath() {
+		return enterPathCsvKml.getText();
+	}
+	
 	public JTextField getEnterPath() {
 		return enterPathWiggle;
 	}
@@ -190,10 +203,14 @@ public class openWindow {
 	public mainRun getKmlTable() {
 		return tableKml;
 	}
+	
 	public String getPathCsvKml() {
-		return enterPathCsvKml.getText();
+		return tableCsv.getKmlPath();
 	}
-	
-	
+		
+	public JFrame getFrame(){
+		return frame;
+	}
+
 	
 }
