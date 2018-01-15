@@ -19,7 +19,8 @@ public class moreFil extends JFrame {
 	private JPanel contentPane;
 	private String csvPath;
 	private String wigglePath;
-	private boolean ok1 = false, ok2 = false, ok3 = false, ok4 = false;
+	private boolean ok1 = false, ok2 = false, ok3 = false, ok4 = false,
+			okNot1 = false, okNot2 = false, okNot3 = false, okNot4 = false;
 
 
 	public String getCsvPath() {
@@ -60,7 +61,7 @@ public class moreFil extends JFrame {
 	 */
 	public moreFil() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 752, 411);
+		setBounds(100, 100, 783, 411);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -76,75 +77,108 @@ public class moreFil extends JFrame {
 					tim.setCsvPath(csvPath);
 					contentPane.hide();
 					tim.setVisible(true);
-
-					if(ok2 && ok3 && ok4){
+					
+					//id or idNot
+					if(ok2){
 						idFil id= new idFil();
-						id.setCsvPath(timePath); //should get the path of the time csv after the time filter
-						contentPane.hide();
-						id.setVisible(true);
-
-						locFil loc= new locFil();
-						loc.setCsvPath(idPath); //should get the path of the id csv after the time,id filter
-						contentPane.hide();
-						loc.setVisible(true);
-
-						radFil rad= new radFil();
-						rad.setCsvPath(locPath); //should get the path of the loc csv after the time,id,loc filter
-						contentPane.hide();
-						rad.setVisible(true);
-					}
-					else if(ok2 && ok3 && !ok4){
-						idFil id= new idFil();
-						id.setCsvPath(timePath); //should get the path of the time csv after the time filter
-						contentPane.hide();
-						id.setVisible(true);
-
-						locFil loc= new locFil();
-						loc.setCsvPath(idPath); //should get the path of the id csv after the time,id filter
-						contentPane.hide();
-						loc.setVisible(true);
-					}
-					else if(ok2 && !ok3 && ok4){
-						idFil id= new idFil();
-						id.setCsvPath(timePath); //should get the path of the time csv after the time filter
-						contentPane.hide();
-						id.setVisible(true);
-
-						radFil rad= new radFil();
-						rad.setCsvPath(idPath); //should get the path of the id csv after the time,id filter
-						contentPane.hide();
-						rad.setVisible(true);
-					}
-					else if(!ok2 && ok3 && ok4){
-						locFil loc= new locFil();
-						loc.setCsvPath(timePath); //should get the path of the time csv after the time filter
-						contentPane.hide();
-						loc.setVisible(true);
-
-						radFil rad= new radFil();
-						rad.setCsvPath(locPath); //should get the path of the loc csv after the time,loc filter
-						contentPane.hide();
-						rad.setVisible(true);
-					}
-					else if(ok2 && !ok3 && !ok4){
-						idFil id= new idFil();
-						id.setCsvPath(timePath); //should get the path of the time csv after the time filter
+						id.setCsvPath(tim.getTimeCsv()); 
 						contentPane.hide();
 						id.setVisible(true);
 					}
-					else if(!ok2 && ok3 && !ok4){
+					else if(okNot2){
+						idFil idNot= new idFil();
+						idNot.setnotFilter(true);
+						idNot.setCsvPath(tim.getTimeCsv()); 
+						contentPane.hide();
+						idNot.setVisible(true);
+					}
+
+					//loc or locNot
+					else if(ok3){
 						locFil loc= new locFil();
-						loc.setCsvPath(timePath); //should get the path of the time csv after the time filter
+						loc.setCsvPath(tim.getTimeCsv()); 
 						contentPane.hide();
 						loc.setVisible(true);
 					}
-					else if(!ok2 && !ok3 && ok4){
+					else if(okNot3){
+						locFil locNot= new locFil();
+						locNot.setnotFilter(true);
+						locNot.setCsvPath(tim.getTimeCsv()); 
+						contentPane.hide();
+						locNot.setVisible(true);
+					}
+
+					//rad or radNot
+					else if(ok4){
 						radFil rad= new radFil();
-						rad.setCsvPath(timePath); //should get the path of the time csv after the time filter
+						rad.setCsvPath(tim.getTimeCsv());
 						contentPane.hide();
 						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(tim.getTimeCsv()); 
+						contentPane.hide();
+						radNot.setVisible(true);
 					}
 				}
+
+				//if timeNot is chosen
+				else if(okNot1){
+					timeFil timNot= new timeFil();
+					timNot.setnotFilter(true);
+					timNot.setCsvPath(csvPath);
+					contentPane.hide();
+					timNot.setVisible(true);
+
+					//id or idNot
+					if(ok2){
+						idFil id= new idFil();
+						id.setCsvPath(timNot.getTimeNotCsv());
+						contentPane.hide();
+						id.setVisible(true);
+					}
+					else if(okNot2){
+						idFil idNot= new idFil();
+						idNot.setnotFilter(true);
+						idNot.setCsvPath(timNot.getTimeNotCsv()); 
+						contentPane.hide();
+						idNot.setVisible(true);
+					}
+
+					//loc or locNot
+					else if(ok3){
+						locFil loc= new locFil();
+						loc.setCsvPath(timNot.getTimeNotCsv());
+						contentPane.hide();
+						loc.setVisible(true);
+					}
+					else if(okNot3){
+						locFil locNot= new locFil();
+						locNot.setnotFilter(true);
+						locNot.setCsvPath(timNot.getTimeNotCsv()); 
+						contentPane.hide();
+						locNot.setVisible(true);
+					}
+
+					//rad or radNot
+					else if(ok4){
+						radFil rad= new radFil();
+						rad.setCsvPath(timNot.getTimeNotCsv()); 
+						contentPane.hide();
+						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(timNot.getTimeNotCsv());
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
+
+				}
+
 				//if the id filter is chosen (and the time is'nt)
 				else if(ok2){
 					idFil id= new idFil();
@@ -152,30 +186,75 @@ public class moreFil extends JFrame {
 					contentPane.hide();
 					id.setVisible(true);
 
-					if(ok3 && ok4){
+					//loc or locNot
+					if(ok3){
 						locFil loc= new locFil();
-						loc.setCsvPath(idPath); //should get the path of the id csv after the id filter
+						loc.setCsvPath(id.getIdCsv()); 
 						contentPane.hide();
 						loc.setVisible(true);
+					}
+					else if(okNot3){
+						locFil locNot= new locFil();
+						locNot.setnotFilter(true);
+						locNot.setCsvPath(id.getIdCsv());
+						contentPane.hide();
+						locNot.setVisible(true);
+					}
 
+					//rad or radNot
+					else if(ok4){
 						radFil rad= new radFil();
-						rad.setCsvPath(locPath); //should get the path of the loc csv after the id,loc filter
+						rad.setCsvPath(id.getIdCsv()); 
 						contentPane.hide();
 						rad.setVisible(true);
 					}
-					else if(ok3 && !ok4){
-						locFil loc= new locFil();
-						loc.setCsvPath(idPath); //should get the path of the id csv after the id filter
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(id.getIdCsv()); 
 						contentPane.hide();
-						loc.setVisible(true);
-					}
-					else if(!ok3 && ok4){
-						radFil rad= new radFil();
-						rad.setCsvPath(idPath); //should get the path of the id csv after the id filter
-						contentPane.hide();
-						rad.setVisible(true);
+						radNot.setVisible(true);
 					}
 				}
+
+				//if idNot is chosen
+				else if(okNot2){
+					idFil idNot= new idFil();
+					idNot.setCsvPath(csvPath);
+					contentPane.hide();
+					idNot.setVisible(true);
+
+					//loc or locNot
+					if(ok3){
+						locFil loc= new locFil();
+						loc.setCsvPath(idNot.getIdNotCsv());
+						contentPane.hide();
+						loc.setVisible(true);
+					}
+					else if(okNot3){
+						locFil locNot= new locFil();
+						locNot.setnotFilter(true);
+						locNot.setCsvPath(idNot.getIdNotCsv()); 
+						contentPane.hide();
+						locNot.setVisible(true);
+					}
+
+					//rad or radNot
+					else if(ok4){
+						radFil rad= new radFil();
+						rad.setCsvPath(idNot.getIdNotCsv()); 
+						contentPane.hide();
+						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(idNot.getIdNotCsv());
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
+				}
+
 				//if the loc filter is chosen(and the time+id are'nt)
 				else if(ok3){
 					locFil loc= new locFil();
@@ -185,21 +264,60 @@ public class moreFil extends JFrame {
 
 					if(ok4){
 						radFil rad= new radFil();
-						rad.setCsvPath(locPath); //should get the path of the loc csv after the loc filter
+						rad.setCsvPath(loc.getLocCsv()); 
 						contentPane.hide();
 						rad.setVisible(true);
 					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(loc.getLocCsv());
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
 				}
+
+				//if locNot is chosen
+				else if(okNot3){
+					locFil locNot= new locFil();
+					locNot.setCsvPath(csvPath); 
+					contentPane.hide();
+					locNot.setVisible(true);
+
+					if(ok4){
+						radFil rad= new radFil();
+						rad.setCsvPath(locNot.getLocNotCsv());
+						contentPane.hide();
+						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(locNot.getLocNotCsv());
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
+				}
+
 				//if the rad filter is chosen(and the time+id+loc are'nt)
-				else if(ok3){
+				else if(ok4){
 					radFil rad= new radFil();
 					rad.setCsvPath(csvPath); 
 					contentPane.hide();
 					rad.setVisible(true);
 				}
+
+				// if the radNot is chosen
+				else if(okNot4){
+					radFil radNot= new radFil();
+					radNot.setnotFilter(true);
+					radNot.setCsvPath(csvPath);
+					contentPane.hide();
+					radNot.setVisible(true);
+				}
 			}
 		});
-		btnAnd.setBounds(54, 247, 97, 29);
+		btnAnd.setBounds(204, 247, 97, 29);
 		contentPane.add(btnAnd);
 
 		JCheckBox chckbxTimeFilter = new JCheckBox("time filter");
@@ -207,9 +325,10 @@ public class moreFil extends JFrame {
 		chckbxTimeFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ok1 = true;
+				okNot1 = false;
 			}
 		});
-		chckbxTimeFilter.setBounds(12, 134, 139, 29);
+		chckbxTimeFilter.setBounds(12, 146, 139, 29);
 		contentPane.add(chckbxTimeFilter);
 
 		JCheckBox chckbxIdFilter = new JCheckBox("ID filter");
@@ -217,9 +336,10 @@ public class moreFil extends JFrame {
 		chckbxIdFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ok2 = true;
+				okNot2 = false;
 			}
 		});
-		chckbxIdFilter.setBounds(188, 136, 113, 25);
+		chckbxIdFilter.setBounds(188, 148, 113, 25);
 		contentPane.add(chckbxIdFilter);
 
 		JCheckBox chckbxRadiusFilter = new JCheckBox("radius filter");
@@ -227,9 +347,10 @@ public class moreFil extends JFrame {
 		chckbxRadiusFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ok3 = true;
+				okNot3 = false;
 			}
 		});
-		chckbxRadiusFilter.setBounds(348, 136, 149, 25);
+		chckbxRadiusFilter.setBounds(348, 148, 149, 25);
 		contentPane.add(chckbxRadiusFilter);
 
 		JCheckBox chckbxLocationFilter = new JCheckBox("location filter");
@@ -237,30 +358,323 @@ public class moreFil extends JFrame {
 		chckbxLocationFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ok4 = true;
+				okNot4 = false;
 			}
 		});
-		chckbxLocationFilter.setBounds(538, 136, 166, 25);
+		chckbxLocationFilter.setBounds(538, 148, 166, 25);
 		contentPane.add(chckbxLocationFilter);
 
 		JButton btnOr = new JButton("or");
 		btnOr.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnOr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				//if the time filter is chosen
+				if(ok1){
+					timeFil tim= new timeFil();
+					tim.setCsvPath(csvPath);
+					contentPane.hide();
+					tim.setVisible(true);
+
+					//id or idNot
+					if(ok2){
+						idFil id= new idFil();
+						id.setCsvPath(csvPath); 
+						contentPane.hide();
+						id.setVisible(true);
+					}
+					else if(okNot2){
+						idFil idNot= new idFil();
+						idNot.setnotFilter(true);
+						idNot.setCsvPath(csvPath); 
+						contentPane.hide();
+						idNot.setVisible(true);
+					}
+
+					//loc or locNot
+					else if(ok3){
+						locFil loc= new locFil();
+						loc.setCsvPath(csvPath);
+						contentPane.hide();
+						loc.setVisible(true);
+					}
+					else if(okNot3){
+						locFil locNot= new locFil();
+						locNot.setnotFilter(true);
+						locNot.setCsvPath(csvPath);
+						contentPane.hide();
+						locNot.setVisible(true);
+					}
+
+					//rad or radNot
+					else if(ok4){
+						radFil rad= new radFil();
+						rad.setCsvPath(csvPath); 
+						contentPane.hide();
+						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(csvPath);
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
+
+				}
+
+				//if timeNot is chosen
+				else if(okNot1){
+					timeFil timNot= new timeFil();
+					timNot.setnotFilter(true);
+					timNot.setCsvPath(csvPath);
+					contentPane.hide();
+					timNot.setVisible(true);
+
+					//id or idNot
+					if(ok2){
+						idFil id= new idFil();
+						id.setCsvPath(csvPath);
+						contentPane.hide();
+						id.setVisible(true);
+					}
+					else if(okNot2){
+						idFil idNot= new idFil();
+						idNot.setnotFilter(true);
+						idNot.setCsvPath(csvPath);
+						contentPane.hide();
+						idNot.setVisible(true);
+					}
+
+					//loc or locNot
+					else if(ok3){
+						locFil loc= new locFil();
+						loc.setCsvPath(csvPath); 
+						contentPane.hide();
+						loc.setVisible(true);
+					}
+					else if(okNot3){
+						locFil locNot= new locFil();
+						locNot.setnotFilter(true);
+						locNot.setCsvPath(csvPath); 
+						contentPane.hide();
+						locNot.setVisible(true);
+					}
+
+					//rad or radNot
+					else if(ok4){
+						radFil rad= new radFil();
+						rad.setCsvPath(csvPath); 
+						contentPane.hide();
+						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(csvPath);
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
+
+				}
+
+				//if the id filter is chosen (and the time is'nt)
+				else if(ok2){
+					idFil id= new idFil();
+					id.setCsvPath(csvPath);
+					contentPane.hide();
+					id.setVisible(true);
+
+					//loc or locNot
+					if(ok3){
+						locFil loc= new locFil();
+						loc.setCsvPath(csvPath);
+						contentPane.hide();
+						loc.setVisible(true);
+					}
+					else if(okNot3){
+						locFil locNot= new locFil();
+						locNot.setnotFilter(true);
+						locNot.setCsvPath(csvPath);
+						contentPane.hide();
+						locNot.setVisible(true);
+					}
+
+					//rad or radNot
+					else if(ok4){
+						radFil rad= new radFil();
+						rad.setCsvPath(csvPath); 
+						contentPane.hide();
+						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(csvPath);
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
+				}
+
+				//if idNot is chosen
+				else if(okNot2){
+					idFil idNot= new idFil();
+					idNot.setCsvPath(csvPath);
+					contentPane.hide();
+					idNot.setVisible(true);
+
+					//loc or locNot
+					if(ok3){
+						locFil loc= new locFil();
+						loc.setCsvPath(csvPath); 
+						contentPane.hide();
+						loc.setVisible(true);
+					}
+					else if(okNot3){
+						locFil locNot= new locFil();
+						locNot.setnotFilter(true);
+						locNot.setCsvPath(csvPath);
+						contentPane.hide();
+						locNot.setVisible(true);
+					}
+
+					//rad or radNot
+					else if(ok4){
+						radFil rad= new radFil();
+						rad.setCsvPath(csvPath); 
+						contentPane.hide();
+						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(csvPath); 
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
+				}
+
+				//if the loc filter is chosen(and the time+id are'nt)
+				else if(ok3){
+					locFil loc= new locFil();
+					loc.setCsvPath(csvPath); 
+					contentPane.hide();
+					loc.setVisible(true);
+
+					if(ok4){
+						radFil rad= new radFil();
+						rad.setCsvPath(csvPath); 
+						contentPane.hide();
+						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(csvPath);
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
+				}
+
+				//if locNot is chosen
+				else if(okNot3){
+					locFil locNot= new locFil();
+					locNot.setCsvPath(csvPath); 
+					contentPane.hide();
+					locNot.setVisible(true);
+
+					if(ok4){
+						radFil rad= new radFil();
+						rad.setCsvPath(csvPath); 
+						contentPane.hide();
+						rad.setVisible(true);
+					}
+					else if(okNot4){
+						radFil radNot= new radFil();
+						radNot.setnotFilter(true);
+						radNot.setCsvPath(csvPath);
+						contentPane.hide();
+						radNot.setVisible(true);
+					}
+				}
+
+				//if the rad filter is chosen(and the time+id+loc are'nt)
+				else if(ok4){
+					radFil rad= new radFil();
+					rad.setCsvPath(csvPath); 
+					contentPane.hide();
+					rad.setVisible(true);
+				}
+
+				// if the radNot is chosen
+				else if(okNot4){
+					radFil radNot= new radFil();
+					radNot.setnotFilter(true);
+					radNot.setCsvPath(csvPath);
+					contentPane.hide();
+					radNot.setVisible(true);
+				}
 			}
 		});
-		btnOr.setBounds(318, 247, 97, 29);
+		btnOr.setBounds(437, 247, 97, 29);
 		contentPane.add(btnOr);
 
-		JButton btnNot = new JButton("not");
-		btnNot.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnNot.setBounds(544, 247, 97, 29);
-		contentPane.add(btnNot);
-		
 		JLabel lblPleaseChooseWhich = new JLabel("please choose which filters would you like to use and how:");
 		lblPleaseChooseWhich.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblPleaseChooseWhich.setBounds(12, 61, 692, 37);
+		lblPleaseChooseWhich.setBounds(12, 28, 692, 37);
 		contentPane.add(lblPleaseChooseWhich);
+
+		JCheckBox chckbxTimenotFilter = new JCheckBox("timeNot filter");
+		chckbxTimenotFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				okNot1 = true;
+				ok1 = false;
+			}
+		});
+		chckbxTimenotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxTimenotFilter.setBounds(12, 184, 166, 29);
+		contentPane.add(chckbxTimenotFilter);
+
+		JCheckBox chckbxIdnotFilter = new JCheckBox("IDNot filter");
+		chckbxIdnotFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				okNot2 = true;
+				ok2 = false;
+			}
+		});
+		chckbxIdnotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxIdnotFilter.setBounds(188, 190, 149, 25);
+		contentPane.add(chckbxIdnotFilter);
+
+		JCheckBox chckbxRadiusnotFilter = new JCheckBox("radiusNot filter");
+		chckbxRadiusnotFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				okNot3 = true;
+				ok3 = false;
+			}
+		});
+		chckbxRadiusnotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxRadiusnotFilter.setBounds(348, 190, 186, 25);
+		contentPane.add(chckbxRadiusnotFilter);
+
+		JCheckBox chckbxLocationnotFilter = new JCheckBox("locationNot filter");
+		chckbxLocationnotFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				okNot4 = true;
+				ok4 = false;
+			}
+		});
+		chckbxLocationnotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxLocationnotFilter.setBounds(538, 190, 198, 25);
+		contentPane.add(chckbxLocationnotFilter);
+
+		JLabel lblNoteYouCant = new JLabel("NOTE: you can't choose the same filter in two different ways, ");
+		lblNoteYouCant.setFont(new Font("Tahoma", Font.ITALIC, 22));
+		lblNoteYouCant.setBounds(12, 66, 645, 29);
+		contentPane.add(lblNoteYouCant);
+
+		JLabel lblForExampleTime = new JLabel("for example- time + timeNot");
+		lblForExampleTime.setFont(new Font("Tahoma", Font.ITALIC, 22));
+		lblForExampleTime.setBounds(12, 96, 470, 29);
+		contentPane.add(lblForExampleTime);
 	}
 }
