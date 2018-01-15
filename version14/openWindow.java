@@ -126,8 +126,9 @@ public class openWindow {
 		button = new JButton("ok");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Thread t1=new Thread();
-				t1.start();
+				Threads t1=new Threads();
+				//t1.start();
+				t1.runThread();
 				String path;
 				try{
 					if(!enterPathCsvKml.getText().isEmpty()){
