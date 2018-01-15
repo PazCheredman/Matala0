@@ -15,7 +15,7 @@ public class main {
 	 * @throws IOException
 	 */
 
-	private static String csvPath;
+	private String csvPath;
 	private String wigglePath;
 
 
@@ -115,43 +115,7 @@ public class main {
 	}
 
 
-	/**
-	 * filter searches by radius inserted in the csv gmon and outputs a new csv and kml
-	 * @throws IOException
-	 */
-	/*public void radius(String path, String lat1, String lon1, String alt1, String rad1) throws IOException{
-		//EX1: Algorithm3- searchByRadious
-		//System.out.println("\nyou are now running algorithm3- searchByRadious");
-		Algorithm3 searchRad =new Algorithm3();
-		outputTable tbl =new outputTable();
-		tbl.read(path,true);
-		searchRad.setSignalData(tbl); 
-	//	Scanner rad= new Scanner(System.in);
-		//System.out.println("enter lat: "); 
-		double lat=Double.parseDouble(lat1);
-		//System.out.println("enter lon: ");
-		double lon=Double.parseDouble(lon1);	
-		//System.out.println("enter alt: ");
-		double alt=Double.parseDouble(alt1);
-		//System.out.println("enter radious: ");
-		double radious=Double.parseDouble(rad1);	
-		outputTable output= searchRad.searchByRadious(lat, lon, alt, radious);
-		if(output.size()>0){
-			//System.out.println("please enter file name:"); //enter: rad.csv
-		//	Scanner fileScanner1= new Scanner(System.in);
-			//String file1= fileScanner1.next();
-			String sub= csvPath.substring(0, csvPath.length()-9);
-			output.write(sub+"\\rad.csv");
-			testKml test= new testKml();
-			test.readCsvFile(sub,"rad.csv");
-			//System.out.println("please go to " +path+ " to see the csv and kml file");
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "no wifi networks within range found");
-		}
-	}
-*/
-	public void radius(String path, String lat1, String lon1, String alt1, String rad1) throws IOException{
+	public void radius(String path, String lat1, String lon1, String alt1, String rad1, boolean NotFilter) throws IOException{
 		//EX1: Algorithm3- searchByRadious
 		Algorithm3 searchRad =new Algorithm3();
 		outputTable tbl =new outputTable();
@@ -161,26 +125,39 @@ public class main {
 		double lon=Double.parseDouble(lon1);	
 		double alt=Double.parseDouble(alt1);
 		double radious=Double.parseDouble(rad1);	
-		outputTable output= searchRad.searchByRadious(lat, lon, alt, radious);
-		if(output.size()>0){
-			String sub= path.substring(0, path.length()-9);
-			output.write(sub+"\\rad.csv");
-			testKml test= new testKml();
-			test.readCsvFile(sub,"rad.csv");
+
+		if(!NotFilter){
+			outputTable output= searchRad.searchByRadious(lat, lon, alt, radious);
+			if(output.size()>0){
+				String sub= path.substring(0, path.length()-9);
+				String file= sub+"\\rad.csv";
+				output.write(file);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "no wifi networks within range found");
+			}
 		}
-		else {
-			JOptionPane.showMessageDialog(null, "no wifi networks within range found");
+		else{
+			outputTable output= searchRad.searchByRadiousNot(lat, lon, alt, radious);
+			if(output.size()>0){
+				String sub= path.substring(0, path.length()-9);
+				String file= sub+"\\radNOT.csv";
+				output.write(file);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "no wifi networks within range found");
+			}
 		}
 	}
 
-	
-	
+
+
 	/**
 	 * filter searches by range location inserted in the csv gmon and outputs a new csv
 	 * @throws IOException
 	 */
 	public void location(String path, String latmin, String lonmin, String altmin,
-			String latmax, String lonmax, String altmax) throws IOException{
+			String latmax, String lonmax, String altmax, boolean NotFilter) throws IOException{
 		//EX3: Algorithm3- searchBylocation
 		Algorithm3 searchRad =new Algorithm3();
 		outputTable tbl =new outputTable();
@@ -193,15 +170,29 @@ public class main {
 		double lonMax=Double.parseDouble(lonmax);	
 		double altMax=Double.parseDouble(altmax);
 
-		outputTable output= searchRad.searchByLocation(latMax, lonMax, altMax, latMin, lonMin, altMin);
-		if(output.size()>0){
-			String sub= path.substring(0,path.length()-9);
-			output.write(sub+"\\locFil.csv");
-			testKml test= new testKml();
-			test.readCsvFile(sub,"loc.csv");
+		if(!NotFilter){
+			outputTable output= searchRad.searchByLocation(latMax, lonMax, altMax, latMin, lonMin, altMin);
+			if(output.size()>0){
+				String sub= path.substring(0,path.length()-9);
+				String file= sub+"\\locFil.csv";
+				output.write(file);
+			}
+
+			else {
+				JOptionPane.showMessageDialog(null, "no wifi networks within range found");
+			}
 		}
-		else {
-			JOptionPane.showMessageDialog(null, "no wifi networks within range found");
+		else{
+			outputTable output= searchRad.searchByLocationNot(latMax, lonMax, altMax, latMin, lonMin, altMin);
+			if(output.size()>0){
+				String sub= path.substring(0,path.length()-9);
+				String file= sub+"\\locFilNOT.csv";
+				output.write(file);
+			}
+
+			else {
+				JOptionPane.showMessageDialog(null, "no wifi networks within range found");
+			}
 		}
 	}
 
@@ -209,22 +200,34 @@ public class main {
 	 * filter searches by id inserted in the csv gmon and outputs a new csv and kml
 	 * @throws IOException
 	 */
-	public void id(String path, String id) throws IOException{
+	public void id(String path, String id, boolean NotFilter) throws IOException{
 		//EX1: Algorithm3- searchByID
 		Algorithm3 searchId =new Algorithm3();
 		outputTable tbl =new outputTable();
 		tbl.read(path,true);
 		searchId.setSignalData(tbl); 
-		outputTable output= searchId.searchByID(id);
-		if(output.size()>0){
-			String sub= path.substring(0,path.length()-9);
-			String file= sub+"\\id.csv";
-			output.write(file);
-			testKml test= new testKml();
-			test.readCsvFile(sub,"id.csv");
+
+		if(!NotFilter){
+			outputTable output= searchId.searchByID(id);
+			if(output.size()>0){
+				String sub= path.substring(0,path.length()-9);
+				String file= sub+"\\id.csv";
+				output.write(file);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "no id specified found");
+			}
 		}
-		else {
-			JOptionPane.showMessageDialog(null, "no id specified found");
+		else{
+			outputTable output= searchId.searchByIDNot(id);
+			if(output.size()>0){
+				String sub= path.substring(0,path.length()-9);
+				String file= sub+"\\idNOT.csv";
+				output.write(file);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "no id specified found");
+			}
 		}
 	}
 
@@ -232,30 +235,34 @@ public class main {
 	 * filter searches by time inserted in the csv gmon and outputs a new csv and kml
 	 * @throws IOException
 	 */
-	public static void time(String path,String timeMin,String timeMax) throws IOException{
+	public void time(String path,String timeMin,String timeMax, boolean NotFilter) throws IOException{
 		//EX3: Algorithm3- searchByTime
 		Algorithm3 searchTime =new Algorithm3();
 		outputTable tbl =new outputTable();
 		tbl.read(path,true);
 		searchTime.setSignalData(tbl); 
-		outputTable output= searchTime.searchByTime(timeMin, timeMax);
-		if(output.size()>0){
-			String sub= path.substring(0,path.length()-9);
-			String file1= sub+"\\time.csv";
-			output.write(file1);
-			testKml test = new testKml();
-			test.readCsvFile(sub,"time.csv");
-		}	
+
+		if(!NotFilter){
+			outputTable output= searchTime.searchByTime(timeMin, timeMax);
+			if(output.size()>0){
+				String sub= path.substring(0,path.length()-9);
+				String file1= sub+"\\time.csv";
+				output.write(file1);
+			}	
+			else{
+				JOptionPane.showMessageDialog(null, "no time specified found");
+			}
+		}
 		else{
-			JOptionPane.showMessageDialog(null, "no time specified found");
+			outputTable output= searchTime.searchByTimeNot(timeMin, timeMax);
+			if(output.size()>0){
+				String sub= path.substring(0,path.length()-9);
+				String file1= sub+"\\timeNOT.csv";
+				output.write(file1);
+			}	
+			else{
+				JOptionPane.showMessageDialog(null, "no time specified found");
+			}
 		}
 	}
-
-public static void main(String [] args) throws IOException{
-	//time("C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\gmon\\gmon.csv", "16:16:18", "16:18:20");
-//	radius("C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\Lenovo\\gmon.csv", "32.17254452", "34.81210289", "35","0.5");
-
-}
-
-
 }
