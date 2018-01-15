@@ -1,6 +1,7 @@
 package version14;
 
 import java.nio.file.FileSystems;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
@@ -11,12 +12,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Threads {
+	
+	private String csvPath;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public String getCsvPath() {
+		return csvPath;
+	}
+
+	public void setCsvPath(String dataPath) {
+		this.csvPath = dataPath;
+	}
+
+	public void runThread() {
 		try(WatchService service = FileSystems.getDefault().newWatchService()){
 			Map<WatchKey, Path> keyMap = new HashMap<>();
-			Path path = Paths.get("C:\\Users\\InnaPC\\Desktop\\munhe\\gmon");
+			Path path = Paths.get(csvPath);
 			keyMap.put(path.register(service,
 					StandardWatchEventKinds.ENTRY_CREATE,
 					StandardWatchEventKinds.ENTRY_DELETE,
