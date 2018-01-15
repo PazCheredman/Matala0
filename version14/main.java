@@ -15,7 +15,7 @@ public class main {
 	 * @throws IOException
 	 */
 
-	private String csvPath;
+	private static String csvPath;
 	private String wigglePath;
 
 
@@ -119,72 +119,86 @@ public class main {
 	 * filter searches by radius inserted in the csv gmon and outputs a new csv and kml
 	 * @throws IOException
 	 */
-	public void radius(String path) throws IOException{
+	/*public void radius(String path, String lat1, String lon1, String alt1, String rad1) throws IOException{
 		//EX1: Algorithm3- searchByRadious
-		System.out.println("\nyou are now running algorithm3- searchByRadious");
+		//System.out.println("\nyou are now running algorithm3- searchByRadious");
 		Algorithm3 searchRad =new Algorithm3();
 		outputTable tbl =new outputTable();
-		tbl.read(path+"\\gmon.csv",true);
+		tbl.read(path,true);
 		searchRad.setSignalData(tbl); 
-		Scanner rad= new Scanner(System.in);
-		System.out.println("enter lat: "); 
-		double lat=Double.parseDouble(rad.next());
-		System.out.println("enter lon: ");
-		double lon=Double.parseDouble(rad.next());	
-		System.out.println("enter alt: ");
-		double alt=Double.parseDouble(rad.next());
-		System.out.println("enter radious: ");
-		double radious=Double.parseDouble(rad.next());	
+	//	Scanner rad= new Scanner(System.in);
+		//System.out.println("enter lat: "); 
+		double lat=Double.parseDouble(lat1);
+		//System.out.println("enter lon: ");
+		double lon=Double.parseDouble(lon1);	
+		//System.out.println("enter alt: ");
+		double alt=Double.parseDouble(alt1);
+		//System.out.println("enter radious: ");
+		double radious=Double.parseDouble(rad1);	
 		outputTable output= searchRad.searchByRadious(lat, lon, alt, radious);
 		if(output.size()>0){
-			System.out.println("please enter file name:"); //enter: rad.csv
-			Scanner fileScanner1= new Scanner(System.in);
-			String file1= fileScanner1.next();
-			output.write(path+"\\"+file1);
+			//System.out.println("please enter file name:"); //enter: rad.csv
+		//	Scanner fileScanner1= new Scanner(System.in);
+			//String file1= fileScanner1.next();
+			String sub= csvPath.substring(0, csvPath.length()-9);
+			output.write(sub+"\\rad.csv");
 			testKml test= new testKml();
-			test.readCsvFile(path+"\\"+file1,path);
-			System.out.println("please go to " +path+ " to see the csv and kml file");
+			test.readCsvFile(sub,"rad.csv");
+			//System.out.println("please go to " +path+ " to see the csv and kml file");
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "no wifi networks within range found");
+		}
+	}
+*/
+	public void radius(String path, String lat1, String lon1, String alt1, String rad1) throws IOException{
+		//EX1: Algorithm3- searchByRadious
+		Algorithm3 searchRad =new Algorithm3();
+		outputTable tbl =new outputTable();
+		tbl.read(path,true);
+		searchRad.setSignalData(tbl); 
+		double lat=Double.parseDouble(lat1);
+		double lon=Double.parseDouble(lon1);	
+		double alt=Double.parseDouble(alt1);
+		double radious=Double.parseDouble(rad1);	
+		outputTable output= searchRad.searchByRadious(lat, lon, alt, radious);
+		if(output.size()>0){
+			String sub= path.substring(0, path.length()-9);
+			output.write(sub+"\\rad.csv");
+			testKml test= new testKml();
+			test.readCsvFile(sub,"rad.csv");
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "no wifi networks within range found");
 		}
 	}
 
+	
+	
 	/**
 	 * filter searches by range location inserted in the csv gmon and outputs a new csv
 	 * @throws IOException
 	 */
-	public void location(String path) throws IOException{
+	public void location(String path, String latmin, String lonmin, String altmin,
+			String latmax, String lonmax, String altmax) throws IOException{
 		//EX3: Algorithm3- searchBylocation
-		System.out.println("\nyou are now running algorithm3- searchByLocation");
 		Algorithm3 searchRad =new Algorithm3();
 		outputTable tbl =new outputTable();
-		String fileName = "gmon.csv";
-		tbl.read(path+"\\"+ fileName,true);
+		tbl.read(path,true);
 		searchRad.setSignalData(tbl); 
-		Scanner loc= new Scanner(System.in);
-		System.out.println("enter lat min: "); 
-		double latMin=Double.parseDouble(loc.next());
-		System.out.println("enter lon min: ");
-		double lonMin=Double.parseDouble(loc.next());
-		System.out.println("enter alt Min: ");
-		double altMin=Double.parseDouble(loc.next());
-
-		System.out.println("enter lat max: "); 
-		double latMax=Double.parseDouble(loc.next());
-		System.out.println("enter lon max: ");
-		double lonMax=Double.parseDouble(loc.next());	
-		System.out.println("enter alt Max: ");
-		double altMax=Double.parseDouble(loc.next());
-
+		double latMin=Double.parseDouble(latmin);
+		double lonMin=Double.parseDouble(lonmin);
+		double altMin=Double.parseDouble(altmin);
+		double latMax=Double.parseDouble(latmax);
+		double lonMax=Double.parseDouble(lonmax);	
+		double altMax=Double.parseDouble(altmax);
 
 		outputTable output= searchRad.searchByLocation(latMax, lonMax, altMax, latMin, lonMin, altMin);
 		if(output.size()>0){
-			System.out.println("please enter file name with .csv ending:"); //enter: loc.csv
-			Scanner fileScanner1= new Scanner(System.in);
-			String file1= fileScanner1.next();
-			output.write(path+"\\"+file1);
-			System.out.println("please go to " +path+ " to see the csv file");
+			String sub= path.substring(0,path.length()-9);
+			output.write(sub+"\\locFil.csv");
+			testKml test= new testKml();
+			test.readCsvFile(sub,"loc.csv");
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "no wifi networks within range found");
@@ -236,4 +250,12 @@ public class main {
 			JOptionPane.showMessageDialog(null, "no time specified found");
 		}
 	}
+
+public static void main(String [] args) throws IOException{
+	//time("C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\gmon\\gmon.csv", "16:16:18", "16:18:20");
+//	radius("C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\Lenovo\\gmon.csv", "32.17254452", "34.81210289", "35","0.5");
+
+}
+
+
 }
