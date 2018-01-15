@@ -23,7 +23,31 @@ public class timeFil extends JFrame {
 	private JTextField textTimeMax;
 	private JTextField textTimeMin;
 	private boolean ok_1=false, ok_2=false;
+
+	public String timeCsv, timeNotCsv;
+	public boolean notFilter = false;
 	
+
+	public String getTimeCsv() {
+		return timeCsv;
+	}
+
+	public void setTimeCsv(String timeCsv) {
+		this.timeCsv = timeCsv;
+	}
+
+	public String getTimeNotCsv() {
+		return timeNotCsv;
+	}
+
+	public void setTimeNotCsv(String timeNotCsv) {
+		this.timeNotCsv = timeNotCsv;
+	}
+
+	public void setnotFilter(boolean dataPath) {
+		this.notFilter = dataPath;
+	}
+
 	public String getCsvPath() {
 		return csvPath;
 	}
@@ -65,27 +89,27 @@ public class timeFil extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblEnterTimeMax = new JLabel("enter time max:");
 		lblEnterTimeMax.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblEnterTimeMax.setBounds(31, 172, 161, 20);
 		contentPane.add(lblEnterTimeMax);
-		
+
 		JLabel lblEnterTimeMin = new JLabel("enter time min:");
 		lblEnterTimeMin.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblEnterTimeMin.setBounds(31, 110, 161, 47);
 		contentPane.add(lblEnterTimeMin);
-		
+
 		textTimeMax = new JTextField();
 		textTimeMax.setBounds(207, 172, 146, 26);
 		contentPane.add(textTimeMax);
 		textTimeMax.setColumns(10);
-		
+
 		textTimeMin = new JTextField();
 		textTimeMin.setBounds(207, 123, 146, 26);
 		contentPane.add(textTimeMin);
 		textTimeMin.setColumns(10);
-		
+
 		JButton ok1 = new JButton("ok");
 		ok1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,7 +120,7 @@ public class timeFil extends JFrame {
 		});
 		ok1.setBounds(368, 122, 59, 29);
 		contentPane.add(ok1);
-		
+
 		JButton ok2 = new JButton("ok");
 		ok2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,25 +131,36 @@ public class timeFil extends JFrame {
 		});
 		ok2.setBounds(368, 171, 59, 29);
 		contentPane.add(ok2);
-		
+
 		JLabel lblEnterYearmonthday = new JLabel("enter: year-month-day |& time by 24 format (not 12 format am.pm)");
 		lblEnterYearmonthday.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblEnterYearmonthday.setBounds(31, 37, 776, 70);
 		contentPane.add(lblEnterYearmonthday);
-		
+
 		JButton btnNext = new JButton("next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-				if(ok_1 && ok_2){
-					String timeMin= textTimeMin.getText();
-					String timeMax= textTimeMax.getText();
-					main m= new main();
-					m.time(csvPath, timeMin, timeMax);
-					String sub =csvPath.substring(0, csvPath.length()-9);
-					testKml kmlId= new testKml();	
-					kmlId.readCsvFile(sub, "time.csv");
-				}
+					if(ok_1 && ok_2){
+
+						String timeMin= textTimeMin.getText();
+						String timeMax= textTimeMax.getText();
+						main m= new main();
+						if(!notFilter){
+							m.time(csvPath, timeMin, timeMax, false);
+							String sub =csvPath.substring(0, csvPath.length()-9);
+							testKml kmlTime= new testKml();	
+							kmlTime.readCsvFile(sub, "time.csv");
+							setTimeCsv(sub + "/time.csv");
+						}
+						else{
+							m.time(csvPath, timeMin, timeMax, true);
+							String sub =csvPath.substring(0, csvPath.length()-9);
+							testKml kmlTime= new testKml();	
+							kmlTime.readCsvFile(sub, "timeNOT.csv");
+							setTimeCsv(sub + "/timeNOT.csv");
+						}
+					}
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "error in input of textFields button");				
 				}
