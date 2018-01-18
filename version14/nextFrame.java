@@ -17,68 +17,34 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 public class nextFrame extends JFrame {
-
-	/*
-	Algorithm = new JButton("Algorithm");
-	Algorithm.setBackground(UIManager.getColor("Button.highlight"));
-	Algorithm.setForeground(Color.RED);
-	Algorithm.setFont(new Font("Tahoma", Font.PLAIN, 20));
-	Algorithm.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			try{
-				algorithmOneTwo alg= new algorithmOneTwo();
-				frame.dispose();
-				alg.setVisible(true);
-			}catch(Exception ex){
-				JOptionPane.showMessageDialog(null, "error in algorithm button");
-			}
-		}
-	});
-	Algorithm.setBounds(96, 309, 147, 100);
-	frame.getContentPane().add(Algorithm);
-
-	filter = new JButton("Filters");
-	filter.setBackground(UIManager.getColor("Button.highlight"));
-	filter.setForeground(Color.RED);
-	filter.setFont(new Font("Tahoma", Font.PLAIN, 20));
-	filter.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			try{
-				filters flt= new filters();
-				frame.dispose();
-				flt.setVisible(true);
-			}catch(Exception ex){
-				JOptionPane.showMessageDialog(null, "error in filter button");
-			}
-		}
-	});
-	filter.setBounds(311, 309, 147, 100);
-	frame.getContentPane().add(filter);
-
-	createFiles = new JButton("create files");
-	createFiles.setForeground(Color.RED);
-	createFiles.setFont(new Font("Tahoma", Font.PLAIN, 20));
-	createFiles.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			try{
-				createFiles file= new createFiles();
-				frame.dispose();
-				file.setVisible(true);
-			}catch(Exception ex){
-				JOptionPane.showMessageDialog(null, "error in create Files button");
-			}
-		}
-	});
-	createFiles.setBounds(561, 309, 180, 100);
-	frame.getContentPane().add(createFiles);
-*/	
 	
 	
 	private JPanel contentPane;
+	private String csvPath;
+	private String wigglePath;
+
+	
+	public String getCsvPath() {
+		return csvPath;
+	}
+
+	public void setCsvPath(String dataPath) {
+		this.csvPath = dataPath;
+	}
+	
+	public String getWigPath() {
+		return wigglePath;
+	}
+
+	public void setWigPath(String wigPath) {
+		this.wigglePath = wigPath;
+	}
+
 
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -103,35 +69,20 @@ public class nextFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
-		/*
-		JButton button = new JButton("Algorithm");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try{
-					algorithmOneTwo alg= new algorithmOneTwo();
-					contentPane.hide();
-					alg.setVisible(true);
-				}catch(Exception ex){
-					JOptionPane.showMessageDialog(null, "error in algorithm button");
-				}
-			}
-		});
-		button.setForeground(Color.RED);
-		button.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		button.setBackground(Color.WHITE);
-		button.setBounds(15, 89, 147, 100);
-		contentPane.add(button);
-		*/
-		
-		JButton btnAlgo = new JButton("algo");
+		csvPath = getCsvPath();
+		wigglePath = getWigPath();
+
+		JButton btnAlgo = new JButton("Algorithms");
 		btnAlgo.setForeground(Color.RED);
 		btnAlgo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnAlgo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
+					
 					algorithmOneTwo alg= new algorithmOneTwo();
+					alg.setCsvPath(csvPath);
+					alg.setWigPath(wigglePath);
+					
 					contentPane.hide();
 					alg.setVisible(true);
 				}catch(Exception ex){
@@ -148,6 +99,8 @@ public class nextFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					filters flt= new filters();
+					flt.setCsvPath(csvPath);
+					flt.setWigPath(wigglePath);
 					contentPane.hide();
 					flt.setVisible(true);
 				}catch(Exception ex){
@@ -165,6 +118,7 @@ public class nextFrame extends JFrame {
 		btnDeleteFiles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
+					outputTable out ;
 					deleteFiles file= new deleteFiles();
 					contentPane.hide();
 					file.setVisible(true);

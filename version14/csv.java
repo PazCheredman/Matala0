@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -74,6 +76,7 @@ public class csv {
 				",SSID6,MAC6,Frequncy6,Signal6,SSID7,MAC7,Frequncy7,Signal7"+
 				",SSID8,MAC8,Frequncy8,Signal8,SSID9,MAC9,Frequncy9,Signal9"+
 				",SSID10,MAC10,Frequncy10,Signal10");
+		writer.write("\n");
 
 		for(int i=0; i<outTab.size(); i++){
 			outputRow row= outTab.getRow(i);
@@ -93,31 +96,47 @@ public class csv {
 		return tab;
 	}
 	
+	public outputTable getOutTabCsv(){
+		return outTab;
+	}
+	
 	public int size(){
 		return tab.size();
 	}
 	
 	public void delete(){
-		for (int i = 0; i < tab.size(); i++) {
-			tab.outTab.getRow(i).addWifi(null, null, 0, 0);
-			tab.outTab.getRow(i).set(null, null, 0, 0, 0);
+		outTab.deleteAllData2();
+	}
+	
+	/*public void del(Path path){
+		try {
+			Files.deleteIfExists(path);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
-
+	*/
 	public static void main(String [] args) throws IOException{
 		//please enter folder that contains wiggleWifi files.
-		System.out.println("please enter path of csv file:"); // C:\\Users\\InnaPC\\Desktop\\munhe\\gmon
-		Scanner fileName= new Scanner(System.in);
-		String insertFileName= fileName.nextLine();
+		//System.out.println("please enter path of csv file:"); // C:\\Users\\InnaPC\\Desktop\\munhe\\gmon
+		//Scanner fileName= new Scanner(System.in);
+		//String insertFileName= fileName.nextLine();
+		
+		String insertFileName ="C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\creategmon";
+		String insertFileName1 ="C:\\Users\\Paz Cheredman\\Desktop\\munchex0\\27.10\\gmon";
 		tab.read(insertFileName);
 		
 		tab.process();
 		//please enter file name, you need to remember the name
 		//so choose something meaningful like "gmon.csv"
-		System.out.println("please enter name of csv file:");
-		String insertFileName2= fileName.nextLine();
-		tab.write(insertFileName+"\\"+insertFileName2);
-		System.out.println("please go to "+insertFileName+ " to see the file");
-	
+	//	System.out.println("please enter name of csv file:");
+		//String insertFileName2= fileName.nextLine();
+		
+		String insertFileName2= "gmon.csv";
+		
+		tab.write(insertFileName1+"\\"+insertFileName2);
+		//System.out.println("please go to "+insertFileName+ " to see the file");
+
+		
 	}	
 }

@@ -117,6 +117,7 @@ public class main {
 
 	public void radius(String path, String lat1, String lon1, String alt1, String rad1, boolean NotFilter) throws IOException{
 		//EX1: Algorithm3- searchByRadious
+		String sub= path.substring(0, path.length()-9);
 		Algorithm3 searchRad =new Algorithm3();
 		outputTable tbl =new outputTable();
 		tbl.read(path,true);
@@ -129,7 +130,6 @@ public class main {
 		if(!NotFilter){
 			outputTable output= searchRad.searchByRadious(lat, lon, alt, radious);
 			if(output.size()>0){
-				String sub= path.substring(0, path.length()-9);
 				String file= sub+"\\rad.csv";
 				output.write(file);
 			}

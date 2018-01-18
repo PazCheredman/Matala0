@@ -28,6 +28,25 @@ public class testKml {
 	private  Double Alt =0.0;
 	private  ArrayList<ArrayList<String>> csvArray = new ArrayList<ArrayList<String>>();
 
+	/*
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		Scanner sc= new Scanner(System.in);
+		System.out.println("please enter path of csv file:");
+		//enter the folder that contains the file created in class "csv"
+		String path= sc.nextLine(); //enter: C:\\Users\\InnaPC\\Desktop\\munhe\\gmon
+		System.out.println("please enter name of csv file:");
+		//enter the file name of the file created in class "csv"
+		String insertFileName= sc.nextLine(); //enter: gmon.csv
+		//readCsvFile(path+"\\",insertFileName);
+
+		System.out.println("please go to "+path+ " to see the file\n");
+
+		System.out.println("please enter the kind of filter you are intrested in : id / time / location");
+		String filterName = sc.nextLine();
+		//changeByFilter(filterName);
+	}
+	*/
 
 	/**
 	 * 
@@ -94,4 +113,37 @@ public class testKml {
 		}
 	}
 
+	/**
+	 * changeByFilter is changing the kml by a filter we get from the user ( id\ time\ location)
+	 * @throws IOException 
+	 */
+	/*
+	public static void changeByFilter(String filter) throws IOException{
+
+		if(filter.equals("id"))// filter by ID
+		{
+			main.id();
+		}
+		else if(filter.equals("time"))//filter by Time
+		{
+			main.time();
+		}
+		else // filter by Location
+		{
+			System.out.println("choose which way you want to apply this algorithm:\n"
+					+ "option A ( enter A )- enter lat lon alt and radius.\n"
+					+ "option B ( enter B )- enter max lat lon alt and min lat lon alt.");
+			Scanner choice= new Scanner(System.in); 
+			String userChoice = choice.next();
+
+			if(userChoice.equals("A"))
+				main.radius();
+			else if(userChoice.equals("B"))
+				main.location();
+			else{
+				System.out.println("unvalid choice, try again");
+				changeByFilter(filter);
+			}
+		}
+	}*/
 }

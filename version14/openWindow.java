@@ -27,8 +27,6 @@ public class openWindow {
 	private mainRun tableKml= new mainRun();
 	private JLabel lblPleaseEnterPath_1;
 	private JTextField enterPathCsvKml;
-	private JButton btnOk;
-	private JButton button;
 	private boolean ok1=false,ok2=false,result=false;
 	private JButton btnNext;
 	
@@ -100,70 +98,15 @@ public class openWindow {
 		lblPleaseEnterPath_1.setBounds(72, 207, 735, 36);
 		frame.getContentPane().add(lblPleaseEnterPath_1);
 		
-		btnOk = new JButton("ok");
-		btnOk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String path;
-				try{
-					if(!enterPathWiggle.getText().isEmpty()){
-						path=enterPathWiggle.getText();
-						ok1=true;
-				 //	JOptionPane.showMessageDialog(null, "ok input of wiggle button");
-					}
-					else{
-						JOptionPane.showMessageDialog(null, "ok input of wiggle button null");
-
-					}
-				}catch(Exception ex){
-					JOptionPane.showMessageDialog(null, "error in input of wiggle button");
-				}
-			}
-		});
-		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnOk.setBounds(607, 152, 115, 29);
-		frame.getContentPane().add(btnOk);
-		
-		button = new JButton("ok");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Threads t1=new Threads();
-				//t1.start();
-				t1.runThread();
-				String path;
-				try{
-					if(!enterPathCsvKml.getText().isEmpty()){
-						path=enterPathCsvKml.getText();
-						ok2=true;
-					tableCsv.init(enterPathWiggle.getText(), enterPathCsvKml.getText(), "gmon.csv");
-					// JOptionPane.showMessageDialog(null, "ok input of CsvKml button");
-				//	C:\Users\Paz Cheredman\Desktop\munchex0\27.10\gmon
-					}
-					else{
-						JOptionPane.showMessageDialog(null, "ok input of CsvKml button null");
-
-					}
-					
-				}catch(Exception ex){
-					JOptionPane.showMessageDialog(null, "error in input of CsvKml button");				}
-			}
-		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		button.setBounds(607, 262, 115, 29);
-		frame.getContentPane().add(button);
-		
 		btnNext = new JButton("next");
 		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				result= tableCsv.okay(enterPathCsvKml.getText()+"\\"+ "gmon.csv");
 				try{
-					if(ok1 && ok2 && result){
-					//	System.out.println(enterPathCsvKml.getText()+"\\"+ "gmon.csv");
-					// 	System.out.println("ans="+result);
-						
+					if(!enterPathWiggle.getText().isEmpty() && !enterPathCsvKml.getText().isEmpty() && result){
+						tableCsv.init(enterPathWiggle.getText(), enterPathCsvKml.getText(), "gmon.csv");
 						nextFrame next= new nextFrame();
-				
 						tableKml.initiliaze(enterPathCsvKml.getText()+"\\", "gmon.csv");
 						next.setWigPath(enterPathWiggle.getText());
 						next.setCsvPath(enterPathCsvKml.getText()+"\\gmon.csv");

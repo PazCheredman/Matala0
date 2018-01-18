@@ -73,4 +73,7 @@ public class readFolder {
 	public table getTables() {
 		return tables;
 	}
+	
+	
+	
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import com.sun.xml.bind.v2.runtime.reflect.opt.Const;
 
 public class Algorithm2 {
@@ -64,7 +66,8 @@ public class Algorithm2 {
 
 		}
 		else{
-			System.out.println("no mac found:"+macs.toString());
+			JOptionPane.showMessageDialog(null, "no mac found:"+macs.toString());
+//			System.out.println("no mac found:"+macs.toString());
 			return null;
 		}
 	}

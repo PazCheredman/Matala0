@@ -34,7 +34,7 @@ public class radFrame extends JFrame {
 	 */
 	public radFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 946, 548);
+		setBounds(100, 100, 928, 268);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -53,11 +53,11 @@ public class radFrame extends JFrame {
 		contentPane.add(lblInTwoYou);
 		
 		JButton btnOne = new JButton("one");
-		btnOne.setBounds(292, 213, 115, 29);
+		btnOne.setBounds(101, 137, 115, 29);
 		contentPane.add(btnOne);
 		
 		JButton btnTwo = new JButton("two");
-		btnTwo.setBounds(518, 213, 115, 29);
+		btnTwo.setBounds(286, 137, 115, 29);
 		contentPane.add(btnTwo);
 	}
 

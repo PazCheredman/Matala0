@@ -19,14 +19,16 @@ public class locFil extends JFrame {
 	private JTextField textField,textField_1,textField_2,textField_3,textField_4,textField_5;
 	private String csvPath;
 	private String wigglePath;
-	private JButton ok1, ok2,ok3,ok4,ok5,ok6;
 	private JButton btnNext;
 	private boolean ok_1=false, ok_2=false, ok_3=false, ok_4=false, ok_5=false, ok_6=false;
-
+	private moreFil more;
 	public boolean notFilter = false;
 	public String locCsv, locNotCsv;
 
-
+	public void setMore(moreFil more) {
+		this.more = more;
+	}
+	
 	public String getLocCsv() {
 		return locCsv;
 	}
@@ -84,22 +86,22 @@ public class locFil extends JFrame {
 	 */
 	public locFil() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 788, 282);
+		setBounds(100, 100, 613, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblEnterMaxlat = new JLabel("enter maxLat");
-		lblEnterMaxlat.setBounds(391, 19, 205, 20);
+		lblEnterMaxlat.setBounds(297, 19, 205, 20);
 		contentPane.add(lblEnterMaxlat);
 
 		JLabel lblEnterMaxlon = new JLabel("enter maxLon");
-		lblEnterMaxlon.setBounds(390, 52, 139, 20);
+		lblEnterMaxlon.setBounds(297, 55, 139, 20);
 		contentPane.add(lblEnterMaxlon);
 
 		JLabel lblEnterMaxalt = new JLabel("enter maxAlt");
-		lblEnterMaxalt.setBounds(400, 88, 139, 20);
+		lblEnterMaxalt.setBounds(297, 88, 139, 20);
 		contentPane.add(lblEnterMaxalt);
 
 		JLabel lblEnterMinlat = new JLabel("enter minLat");
@@ -130,113 +132,54 @@ public class locFil extends JFrame {
 		textField_2.setColumns(10);
 
 		textField_3 = new JTextField();
-		textField_3.setBounds(502, 13, 146, 26);
+		textField_3.setBounds(406, 16, 146, 26);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 
 		textField_4 = new JTextField();
-		textField_4.setBounds(502, 49, 146, 26);
+		textField_4.setBounds(406, 55, 146, 26);
 		contentPane.add(textField_4);
 		textField_4.setColumns(10);
 
 		textField_5 = new JTextField();
-		textField_5.setBounds(502, 85, 146, 26);
+		textField_5.setBounds(406, 90, 146, 26);
 		contentPane.add(textField_5);
 		textField_5.setColumns(10);
-
-		ok1 = new JButton("ok");
-		ok1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!textField.getText().isEmpty()){
-					ok_1=true;
-				}
-			}
-		});
-		ok1.setBounds(280, 12, 58, 29);
-		contentPane.add(ok1);
-
-		ok2 = new JButton("ok");
-		ok2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!textField_1.getText().isEmpty()){
-					ok_2=true;
-				}
-			}
-		});
-		ok2.setBounds(280, 51, 58, 29);
-		contentPane.add(ok2);
-
-		ok3 = new JButton("ok");
-		ok3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!textField_2.getText().isEmpty()){
-					ok_3=true;
-				}
-			}
-		});
-		ok3.setBounds(280, 84, 58, 29);
-		contentPane.add(ok3);
-
-		ok4 = new JButton("ok");
-		ok4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!textField_3.getText().isEmpty()){
-					ok_4=true;
-				}
-			}
-		});
-		ok4.setBounds(670, 10, 58, 29);
-		contentPane.add(ok4);
-
-		ok5 = new JButton("ok");
-		ok5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!textField_4.getText().isEmpty()){
-					ok_5=true;
-				}
-			}
-		});
-		ok5.setBounds(670, 48, 58, 29);
-		contentPane.add(ok5);
-
-		ok6 = new JButton("ok");
-		ok6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!textField_5.getText().isEmpty()){
-					ok_6=true;
-				}
-			}
-		});
-		ok6.setBounds(670, 84, 58, 29);
-		contentPane.add(ok6);
 
 		btnNext = new JButton("next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					if(ok_1 && ok_2 && ok_3 && ok_4 && ok_5 && ok_6){
+					if(!textField.getText().isEmpty() && !textField_1.getText().isEmpty() && 
+							!textField_2.getText().isEmpty() && !textField_3.getText().isEmpty() &&
+							!textField_4.getText().isEmpty() && !textField_5.getText().isEmpty()){
 						main m= new main();
 						if(!notFilter){
 							m.location(csvPath, textField.getText(), textField_1.getText(), textField_2.getText(), 
 									textField_3.getText(), textField_4.getText(), textField_5.getText(), false);
+							
 							String sub =csvPath.substring(0, csvPath.length()-9);
 							testKml kmlLoc= new testKml();	
-							kmlLoc.readCsvFile(sub, "loc.csv");
-							setLocCsv(sub + "/loc.csv");
+							kmlLoc.readCsvFile(sub, "locFil.csv");
+							setLocCsv(sub + "/locFil.csv");
+							contentPane.hide();
+							more.nextWindow(sub + "/locFil.csv", 4);
 						}
 						else{
 							m.location(csvPath, textField.getText(), textField_1.getText(), textField_2.getText(), 
 									textField_3.getText(), textField_4.getText(), textField_5.getText(), true);
 							String sub =csvPath.substring(0, csvPath.length()-9);
 							testKml kmlLoc= new testKml();	
-							kmlLoc.readCsvFile(sub, "locNot.csv");
-							setLocNotCsv(sub + "/locNot.csv");
+							kmlLoc.readCsvFile(sub, "locFilNOT.csv");
+							setLocNotCsv(sub + "/locFilNOT.csv");
+							contentPane.hide();
+							more.nextWindow(sub + "/locFilNOT.csv", 4);
 						}
 						JOptionPane.showMessageDialog(null, "go to the folder to see output files");
 						contentPane.hide();
 					}
 					else{
-						JOptionPane.showMessageDialog(null, "ok input of textField button null");
+						JOptionPane.showMessageDialog(null, " input of textField button null");
 
 					}
 				}catch(Exception ex){
@@ -244,7 +187,7 @@ public class locFil extends JFrame {
 			}
 
 		});
-		btnNext.setBounds(326, 164, 115, 29);
+		btnNext.setBounds(213, 132, 115, 29);
 		contentPane.add(btnNext);
 	}
 

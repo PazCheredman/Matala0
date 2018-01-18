@@ -21,10 +21,13 @@ public class idFil extends JFrame {
 	private String csvPath;
 	private String wigglePath;
 	private JTextField textField;
-	
+	private moreFil more;
 	public boolean notFilter = false;
 	public String idCsv, idNotCsv;
 	
+	public void setMore(moreFil more) {
+		this.more = more;
+	}
 
 	public String getIdCsv() {
 		return idCsv;
@@ -114,17 +117,21 @@ public class idFil extends JFrame {
 							testKml kmlId= new testKml();	
 							kmlId.readCsvFile(sub, "id.csv");
 							setIdCsv(sub + "/id.csv");
+							contentPane.hide();
+							more.nextWindow(sub + "/id.csv", 3);
 						}
 						else{
 							String sub =csvPath.substring(0, csvPath.length()-9);
 							m.id(csvPath, id, true);
 							testKml kmlId= new testKml();	
-							kmlId.readCsvFile(sub, "idNot.csv");
-							setIdNotCsv(sub + "/idNot.csv");
+							kmlId.readCsvFile(sub, "idNOT.csv");
+							setIdNotCsv(sub + "/idNOT.csv");
+							contentPane.hide();
+							more.nextWindow(sub + "/idNOT.csv", 3);
 						}
 					}
 					else{
-						JOptionPane.showMessageDialog(null, "ok input of textField button null");
+						JOptionPane.showMessageDialog(null, " input of textField button null");
 
 					}
 				}catch(Exception ex){

@@ -10,7 +10,7 @@ import version11.locationSignal;
 public class Algorithm1 {
 
 	private MacSignalContainer macSignals;
-
+	
 	public void setSignalData(MacSignalContainer msc) {
 		macSignals = msc;
 	}

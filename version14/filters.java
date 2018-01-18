@@ -122,7 +122,7 @@ public class filters extends JFrame {
 				more.setVisible(true);
 			}
 		});
-		btnMoreThanOne.setBounds(622, 181, 196, 29);
+		btnMoreThanOne.setBounds(623, 181, 196, 29);
 		contentPane.add(btnMoreThanOne);
 
 		JButton btnId = new JButton("ID");

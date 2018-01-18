@@ -17,6 +17,27 @@ import java.awt.Font;
 public class algorithmOneTwo extends JFrame {
 
 	private JPanel contentPane;
+	private String csvPath;
+	private String wigglePath;
+
+	
+	public String getCsvPath() {
+		return csvPath;
+	}
+
+	public void setCsvPath(String dataPath) {
+		this.csvPath = dataPath;
+	}
+	
+	public String getWigPath() {
+		return wigglePath;
+	}
+
+	public void setWigPath(String wigPath) {
+		this.wigglePath = wigPath;
+	}
+
+
 
 	/**
 	 * Launch the application.
@@ -40,7 +61,7 @@ public class algorithmOneTwo extends JFrame {
 	 */
 	public algorithmOneTwo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 728, 524);
+		setBounds(100, 100, 687, 418);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,13 +77,17 @@ public class algorithmOneTwo extends JFrame {
 		algorithm1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					algOne algone= new algOne();
-					contentPane.hide();
-					//	algone.setPath(pathEntered.getText());
-					algone.setVisible(true);
 
+					main alg1= new main();
+					alg1.algorithm1(csvPath);
+					
+					contentPane.hide();
+					JOptionPane.showMessageDialog(null, "go to your folder to see the changes after this algorithm");
+					 
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "error in algorithm1 button");
+
+				//	JOptionPane.showMessageDialog(null, "error in algorithm1 button");
 				}
 
 			}
@@ -71,6 +96,25 @@ public class algorithmOneTwo extends JFrame {
 		contentPane.add(algorithm1);
 
 		JButton algorithm2 = new JButton("Algorithm2");
+		algorithm2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+
+					alg2ChooseOptions choose =new alg2ChooseOptions();
+					choose.setCsvPath(csvPath);
+					choose.setWigPath(wigglePath);
+
+					contentPane.hide();
+					choose.setVisible(true);
+				 
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(null, "error in algorithm1 button");
+
+				//	JOptionPane.showMessageDialog(null, "error in algorithm1 button");
+				}
+			
+			}
+		});
 		algorithm2.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		algorithm2.setBounds(341, 227, 182, 57);
 		contentPane.add(algorithm2);

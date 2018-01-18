@@ -40,22 +40,22 @@ public class radFrameTwo extends JFrame {
 	 */
 	public radFrameTwo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 697, 461);
+		setBounds(100, 100, 697, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblEnterMaxlat = new JLabel("enter maxLat");
-		lblEnterMaxlat.setBounds(15, 132, 205, 20);
+		lblEnterMaxlat.setBounds(327, 16, 205, 20);
 		contentPane.add(lblEnterMaxlat);
 		
 		JLabel lblEnterMaxlon = new JLabel("enter maxLon");
-		lblEnterMaxlon.setBounds(15, 168, 139, 20);
+		lblEnterMaxlon.setBounds(327, 52, 139, 20);
 		contentPane.add(lblEnterMaxlon);
 		
 		JLabel lblEnterMaxalt = new JLabel("enter maxAlt");
-		lblEnterMaxalt.setBounds(15, 205, 139, 20);
+		lblEnterMaxalt.setBounds(327, 88, 139, 20);
 		contentPane.add(lblEnterMaxalt);
 		
 		JLabel lblEnterMinlat = new JLabel("enter minLat");
@@ -86,17 +86,17 @@ public class radFrameTwo extends JFrame {
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(119, 129, 146, 26);
+		textField_3.setBounds(448, 13, 146, 26);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(119, 168, 146, 26);
+		textField_4.setBounds(448, 49, 146, 26);
 		contentPane.add(textField_4);
 		textField_4.setColumns(10);
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(119, 202, 146, 26);
+		textField_5.setBounds(448, 88, 146, 26);
 		contentPane.add(textField_5);
 		textField_5.setColumns(10);
 	}

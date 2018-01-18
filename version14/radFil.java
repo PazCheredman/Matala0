@@ -23,11 +23,14 @@ public class radFil extends JFrame {
 	private boolean ok_1=false, ok_2=false, ok_3=false, ok_4=false;
 	private String csvPath;
 	private String wigglePath;
-
 	public boolean notFilter = false;
 	public String radCsv, radNotCsv;
+	private moreFil more;
 
-
+	public void setMore(moreFil more) {
+		this.more = more;
+	}
+	
 	public String getRadCsv() {
 		return radCsv;
 	}
@@ -127,50 +130,6 @@ public class radFil extends JFrame {
 		contentPane.add(radText);
 		radText.setColumns(10);
 
-		JButton ok1 = new JButton("ok");
-		ok1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(!latText.getText().isEmpty()){
-					ok_1=true;
-				}
-			}
-		});
-		ok1.setBounds(315, 128, 49, 29);
-		contentPane.add(ok1);
-
-		JButton ok2 = new JButton("ok");
-		ok2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!lonText.getText().isEmpty()){
-					ok_2=true;
-				}
-			}
-		});
-		ok2.setBounds(315, 164, 49, 29);
-		contentPane.add(ok2);
-
-		JButton ok3 = new JButton("ok");
-		ok3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!altText.getText().isEmpty()){
-					ok_3=true;
-				}
-			}
-		});
-		ok3.setBounds(315, 200, 49, 29);
-		contentPane.add(ok3);
-
-		JButton ok4 = new JButton("ok");
-		ok4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!radText.getText().isEmpty()){
-					ok_4=true;
-				}
-			}
-		});
-		ok4.setBounds(315, 236, 49, 29);
-		contentPane.add(ok4);
-
 		JLabel lblPleaseEntetLatlonalt = new JLabel("please entet lat,lon,alt and the radious that you want to do");
 		lblPleaseEntetLatlonalt.setBounds(15, 31, 435, 49);
 		contentPane.add(lblPleaseEntetLatlonalt);
@@ -183,7 +142,7 @@ public class radFil extends JFrame {
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					if(ok_1 && ok_2 && ok_3 && ok_4){
+					if(!latText.getText().isEmpty() && !lonText.getText().isEmpty() && !altText.getText().isEmpty() && !radText.getText().isEmpty()){
 						main m= new main();
 						if(!notFilter){
 							m.radius(csvPath,latText.getText(),lonText.getText(),altText.getText(),radText.getText(), false);
@@ -196,15 +155,15 @@ public class radFil extends JFrame {
 							m.radius(csvPath,latText.getText(),lonText.getText(),altText.getText(),radText.getText(), true);
 							String sub =csvPath.substring(0, csvPath.length()-9);
 							testKml kmlRad= new testKml();	
-							kmlRad.readCsvFile(sub, "radNot.csv");
-							setRadNotCsv(sub + "/radNot.csv");
+							kmlRad.readCsvFile(sub, "radNOT.csv");
+							setRadNotCsv(sub + "/radNOT.csv");
 						}
 
 						JOptionPane.showMessageDialog(null, "go to the folder to see output");
 						contentPane.hide();
 					}
 					else{
-						JOptionPane.showMessageDialog(null, "ok input of textField button null");
+						JOptionPane.showMessageDialog(null, "input of textField button null");
 
 					}
 				}catch(Exception ex){

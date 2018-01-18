@@ -40,7 +40,7 @@ public class locationSignal {
     	double dlat = lat - ls.lat;
     	double dlon = lon - ls.lon;
     	double dalt = alt - ls.alt;
-    	return Math.sqrt(dlat * dlat + dlon*dlon + dalt*dlat);
+    	return Math.sqrt(dlat * dlat + dlon*dlon + dalt*dalt);
     }
     
 	public double getSignal() {
