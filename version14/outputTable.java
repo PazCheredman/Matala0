@@ -78,6 +78,10 @@ public class outputTable {
 		return ls.get(i);
 	}
 
+	public int getWifiCount(int i) {
+		return ls.get(i).getWifiCount();
+	}
+
 	public void add(outputRow row) {
 		ls.add(row);
 	}
@@ -148,16 +152,17 @@ public class outputTable {
 		}
 	}
 
-	public void read_mysql() throws SQLException{
+	public void read_mysql(String filename) throws SQLException, IOException{
 		// get the connection to the database
 		Connection myConnection = DriverManager.getConnection(url,username,password);
 		//create a statement
 		Statement myState = myConnection.createStatement();
 		// execute SQL query
 		ResultSet myRes = myState.executeQuery("select * from ex4_db");
-		outputRow row = new outputRow();
+		
 		//process the result set
 		while(myRes.next()){
+			outputRow row = new outputRow();
 			String time = myRes.getString(2);
 			String id = myRes.getString(3);
 			String num;
@@ -169,8 +174,12 @@ public class outputTable {
 			num = myRes.getString(6);
 			alt = Double.parseDouble(num);
 			row.set(time, id, lat, lon, alt);
-			int wifiCount = Integer.parseInt(myRes.getString(7));
+			int wifiCount = Integer.parseInt(myRes.getString(7));			
+			if(wifiCount > row.getWifiCounter()){
+					wifiCount= row.getWifiCounter()-1;
+				}
 			for (int i = 0; i < wifiCount; i++) { // get mac from
+				
 				// csv
 				String mac = myRes.getString(8+i*2);
 				String signalStr = myRes.getString(8 + i*2+1);
@@ -181,12 +190,12 @@ public class outputTable {
 			}
 			add(row);
 		}
-
+		write(filename);
 	}
 
-	public void read(String filename, boolean head) throws SQLException{
+	public void read(String filename, boolean head) throws SQLException, IOException{
 		read_file(filename,head);
-		read_mysql();
+		read_mysql(filename);
 	}
 	
 	public void setDataSql(String ip, int port, String username, String password,

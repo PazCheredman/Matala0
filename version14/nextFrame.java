@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -214,11 +215,11 @@ public class nextFrame extends JFrame {
 			/*	System.out.println(temp.getUrl());
 				System.out.println(temp.getUsername());
 				System.out.println(temp.getPassword());*/
-				//System.out.println(csvPath);
+				//System.out.println();
 				try {
-					temp.read_mysql();
+					temp.read_mysql(csvPath);
 					//temp.read(csvPath, true);
-				} catch (SQLException e) {
+				} catch (SQLException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

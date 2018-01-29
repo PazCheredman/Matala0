@@ -66,6 +66,14 @@ public class outputRow {
 	}
 
 
+	public int getWifiCounter() {
+		return wifi.length-1;
+	}
+
+	public void setWifi(wifiNetworks[] wifi) {
+		this.wifi = wifi;
+	}
+
 	public int getWifiCount() {
 		return wifiCount;
 	}
