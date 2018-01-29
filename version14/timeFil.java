@@ -27,7 +27,7 @@ public class timeFil extends JFrame {
 	public boolean notFilter = false;
 	private boolean nextOK =false;
 	private moreFil more;
-	
+
 	public moreFil getMore() {
 		return more;
 	}
@@ -130,7 +130,6 @@ public class timeFil extends JFrame {
 		JButton btnNext = new JButton("next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String sub =csvPath.substring(0, csvPath.length()-9);
 				try{
 					if(!textTimeMin.getText().isEmpty() && !textTimeMax.getText().isEmpty()){
 						String timeMin= textTimeMin.getText();
@@ -139,20 +138,30 @@ public class timeFil extends JFrame {
 						if(!notFilter){
 							m.time(csvPath, timeMin, timeMax, false);
 							testKml kmlTime= new testKml();	
-							kmlTime.readCsvFile(sub, "time.csv");
-							setTimeCsv(sub + "/time.csv");
+							kmlTime.readCsvFile(more.getSub(), "time.csv");
+							setTimeCsv(more.getSub() + "/time.csv");
 							contentPane.hide();
-							more.nextWindow(sub + "/time.csv", 2);
+							if(more.isAndPressed()){
+								more.nextWindowAnd(more.getSub(), "time.csv", 2);
+							}
+							else if(more.isOrPressed()){
+								more.nextWindowOr( 2);
+							}
 						}
 						else{
 							m.time(csvPath, timeMin, timeMax, true);
 							testKml kmlTime= new testKml();	
-							kmlTime.readCsvFile(sub, "timeNOT.csv");
-							setTimeCsv(sub + "/timeNOT.csv");
+							kmlTime.readCsvFile(more.getSub(), "timeNOT.csv");
+							setTimeCsv(more.getSub() + "/timeNOT.csv");
 							contentPane.hide();
-							more.nextWindow(sub + "/timeNOT.csv", 2);
+							if(more.isAndPressed()){
+								more.nextWindowAnd(more.getSub() ,"timeNOT.csv", 2);
+							}
+							else if(more.isOrPressed()){
+								more.nextWindowOr(2);
+							}
 						}
-						
+
 					}
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "error in input of textFields button");				

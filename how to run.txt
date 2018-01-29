@@ -1,0 +1,4 @@
+
+Go to "openWindow" class and run it.
+Follow the instructions, for example if you want to choose filter “time” press on 
+“filter” button and then on “time” button.

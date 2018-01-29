@@ -19,33 +19,77 @@ public class moreFil extends JFrame {
 
 	private table tables;
 	private JPanel contentPane;
-	private String csvPath;
+	private String csvPath,sub =csvPath.substring(0, csvPath.length()-9); ;
 	private String wigglePath;
 	private boolean ok1 = false, ok2 = false, ok3 = false, ok4 = false,
 			okNot1 = false, okNot2 = false, okNot3 = false, okNot4 = false;
+	private boolean andPressed=false,orPressed=false ;
+	private int arr[];
+	private orFil orfil=new orFil();
 	
-	public void nextWindow(String path, int number){
+	
+	public String getSub() {
+		return sub;
+	}
+
+	public boolean isOrPressed() {
+		return orPressed;
+	}
+
+	public void setOrPressed(boolean orPressed) {
+		this.orPressed = orPressed;
+	}
+
+	public boolean isAndPressed() {
+		return andPressed;
+	}
+
+	public void setAndPressed(boolean andPressed) {
+		this.andPressed = andPressed;
+	}
+
+	public void nextWindowAnd(String path,String fileRecevied, int number){
 		switch (number){
 		case 1:
 			if (isOk1() || isOkNot1()){
-				chooseTime(path);
+				chooseTime(path+"\\"+fileRecevied);
 			}
 		case 2:
 			if (isOk2() || isOkNot2()){
-				chooseId(path);
+				chooseId(path+"\\"+fileRecevied);
 			}
 		case 3:
 			if (isOk3() || isOkNot3()){
-				chooseLoc(path);
+				chooseLoc(path+"\\"+fileRecevied);
 			}
 		case 4:
 			if (isOk4() || isOkNot4()){
-				chooseRad(path);
+				chooseRad(path+"\\"+fileRecevied);
 			}
 		}
 	}
-	
-	
+
+	public void nextWindowOr(int number){
+		switch (number){
+		case 1:
+			if (isOk1() || isOkNot1()){
+				chooseTime(csvPath);
+			}
+		case 2:
+			if (isOk2() || isOkNot2()){
+				chooseId(csvPath);
+			}
+		case 3:
+			if (isOk3() || isOkNot3()){
+				chooseLoc(csvPath);
+			}
+		case 4:
+			if (isOk4() || isOkNot4()){
+				chooseRad(csvPath);
+			}
+		}
+	}
+
 	public boolean isOk1() {
 		return ok1;
 	}
@@ -95,14 +139,14 @@ public class moreFil extends JFrame {
 	}
 
 
-	public boolean readFolderTime(String directory){
+	/*public boolean readFolderTime(String directory){
 		File folder=new File(directory);
 		tables=new table();
 		if(directory.contains("time.csv"))	{
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	public void chooseTime(String path){
 		timeFil tim= new timeFil();
@@ -168,6 +212,33 @@ public class moreFil extends JFrame {
 		}
 	}
 
+	public int whoPressed(){
+		if(ok1) return 1;
+		else if(ok2) return 2;
+		else if(ok3) return 3;
+		else if(ok4) return 4;
+		else if(okNot1) return 5;
+		else if(okNot2) return 6;
+		else if(okNot3) return 7;
+		else if(okNot4) return 8;
+		return -1;
+	}
+
+	public void press(String path, int number){
+		switch (number){
+		case 1:
+			orfil.setFilename1("time.csv");
+
+		case 2:
+			orfil.setFilename1("id.csv");
+
+		case 3:
+			orfil.setFilename1("time.csv");
+
+		case 4:
+			orfil.setFilename1("time.csv");
+		}
+	}
 
 	/**
 	 * Launch the application.
@@ -200,7 +271,7 @@ public class moreFil extends JFrame {
 		btnAnd.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnAnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String sub =csvPath.substring(0, csvPath.length()-9);
+				andPressed=true;
 				if(ok1 || okNot1){
 					chooseTime(csvPath);
 				}
@@ -217,7 +288,168 @@ public class moreFil extends JFrame {
 		});
 
 
-		/*//if the time filter is chosen
+
+		btnAnd.setBounds(204, 247, 97, 29);
+		contentPane.add(btnAnd);
+
+		JCheckBox chckbxTimeFilter = new JCheckBox("time filter");
+		chckbxTimeFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxTimeFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ok1 = true;
+				okNot1 = false;
+			}
+		});
+		chckbxTimeFilter.setBounds(12, 146, 139, 29);
+		contentPane.add(chckbxTimeFilter);
+
+		JCheckBox chckbxIdFilter = new JCheckBox("ID filter");
+		chckbxIdFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxIdFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ok2 = true;
+				okNot2 = false;
+			}
+		});
+		chckbxIdFilter.setBounds(188, 148, 113, 25);
+		contentPane.add(chckbxIdFilter);
+
+		JCheckBox chckbxRadiusFilter = new JCheckBox("radius filter");
+		chckbxRadiusFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxRadiusFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ok4 = true;
+				okNot4 = false;
+			}
+		});
+		chckbxRadiusFilter.setBounds(553, 148, 149, 25);
+		contentPane.add(chckbxRadiusFilter);
+
+		JCheckBox chckbxLocationFilter = new JCheckBox("location filter");
+		chckbxLocationFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxLocationFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ok3 = true;
+				okNot3 = false;
+			}
+		});
+		chckbxLocationFilter.setBounds(344, 148, 166, 25);
+		contentPane.add(chckbxLocationFilter);
+
+		JButton btnOr = new JButton("or");
+		btnOr.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnOr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				orPressed=true;
+				if(ok1 || okNot1){
+					chooseTime(csvPath);
+				}
+				else if(ok2 || okNot2){
+					chooseId(csvPath);
+				}
+				else if(ok3 || okNot3){
+					chooseLoc(csvPath);
+				}
+				else if(ok4 || okNot4){
+					chooseRad(csvPath);
+				}
+
+				//	String sub =csvPath.substring(0, csvPath.length()-9);
+				//	orFil orfil=new orFil();
+				/*	if(ok1){
+					orfil.readFolder(sub, "time.csv");
+				}
+				if(ok2){
+					orfil.readFolder(sub, "id.csv");
+				}
+				if(ok3){
+					orfil.readFolder(sub, "loc.csv");
+				}
+				if(ok4){
+					orfil.readFolder(sub, "rad.csv");
+				}*/
+
+				/*if(ok1 || okNot1){
+					chooseTime(csvPath);
+				}
+				else if(ok2 || okNot2){
+					chooseId(csvPath);
+				}
+				else if(ok3 || okNot3){
+					chooseLoc(csvPath);
+				}
+				else if(ok4 || okNot4){
+					chooseRad(csvPath);
+				}*/
+			}
+		});
+		btnOr.setBounds(437, 247, 97, 29);
+		contentPane.add(btnOr);
+
+		JLabel lblPleaseChooseWhich = new JLabel("please choose which filters would you like to use and how:");
+		lblPleaseChooseWhich.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblPleaseChooseWhich.setBounds(12, 28, 692, 37);
+		contentPane.add(lblPleaseChooseWhich);
+
+		JCheckBox chckbxTimenotFilter = new JCheckBox("timeNot filter");
+		chckbxTimenotFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				okNot1 = true;
+				ok1 = false;
+			}
+		});
+		chckbxTimenotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxTimenotFilter.setBounds(12, 184, 166, 29);
+		contentPane.add(chckbxTimenotFilter);
+
+		JCheckBox chckbxIdnotFilter = new JCheckBox("IDNot filter");
+		chckbxIdnotFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				okNot2 = true;
+				ok2 = false;
+			}
+		});
+		chckbxIdnotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxIdnotFilter.setBounds(188, 190, 149, 25);
+		contentPane.add(chckbxIdnotFilter);
+
+		JCheckBox chckbxRadiusnotFilter = new JCheckBox("radiusNot filter");
+		chckbxRadiusnotFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				okNot4 = true;
+				ok4 = false;
+			}
+		});
+		chckbxRadiusnotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxRadiusnotFilter.setBounds(553, 190, 186, 25);
+		contentPane.add(chckbxRadiusnotFilter);
+
+		JCheckBox chckbxLocationnotFilter = new JCheckBox("locationNot filter");
+		chckbxLocationnotFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				okNot3 = true;
+				ok3 = false;
+			}
+		});
+		chckbxLocationnotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		chckbxLocationnotFilter.setBounds(344, 188, 198, 25);
+		contentPane.add(chckbxLocationnotFilter);
+
+		JLabel lblNoteYouCant = new JLabel("NOTE: you can't choose the same filter in two different ways, ");
+		lblNoteYouCant.setFont(new Font("Tahoma", Font.ITALIC, 22));
+		lblNoteYouCant.setBounds(12, 66, 645, 29);
+		contentPane.add(lblNoteYouCant);
+
+		JLabel lblForExampleTime = new JLabel("for example- time + timeNot");
+		lblForExampleTime.setFont(new Font("Tahoma", Font.ITALIC, 22));
+		lblForExampleTime.setBounds(12, 96, 470, 29);
+		contentPane.add(lblForExampleTime);
+
+	}
+}
+
+/*andButton
+ * //if the time filter is chosen
 				if(ok1){
 					timeFil tim= new timeFil();
 					tim.setCsvPath(csvPath);
@@ -470,58 +702,10 @@ public class moreFil extends JFrame {
 					radNot.setVisible(true);
 				}*/
 
-		btnAnd.setBounds(204, 247, 97, 29);
-		contentPane.add(btnAnd);
 
-		JCheckBox chckbxTimeFilter = new JCheckBox("time filter");
-		chckbxTimeFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		chckbxTimeFilter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ok1 = true;
-				okNot1 = false;
-			}
-		});
-		chckbxTimeFilter.setBounds(12, 146, 139, 29);
-		contentPane.add(chckbxTimeFilter);
 
-		JCheckBox chckbxIdFilter = new JCheckBox("ID filter");
-		chckbxIdFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		chckbxIdFilter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ok2 = true;
-				okNot2 = false;
-			}
-		});
-		chckbxIdFilter.setBounds(188, 148, 113, 25);
-		contentPane.add(chckbxIdFilter);
-
-		JCheckBox chckbxRadiusFilter = new JCheckBox("radius filter");
-		chckbxRadiusFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		chckbxRadiusFilter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ok4 = true;
-				okNot4 = false;
-			}
-		});
-		chckbxRadiusFilter.setBounds(553, 148, 149, 25);
-		contentPane.add(chckbxRadiusFilter);
-
-		JCheckBox chckbxLocationFilter = new JCheckBox("location filter");
-		chckbxLocationFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		chckbxLocationFilter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ok3 = true;
-				okNot3 = false;
-			}
-		});
-		chckbxLocationFilter.setBounds(344, 148, 166, 25);
-		contentPane.add(chckbxLocationFilter);
-
-		JButton btnOr = new JButton("or");
-		btnOr.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnOr.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//if the time filter is chosen
+/*orButton
+ * //if the time filter is chosen
 				if(ok1){
 					timeFil tim= new timeFil();
 					tim.setCsvPath(csvPath);
@@ -766,69 +950,4 @@ public class moreFil extends JFrame {
 					contentPane.hide();
 					radNot.setVisible(true);
 				}
-			}
-		});
-		btnOr.setBounds(437, 247, 97, 29);
-		contentPane.add(btnOr);
-
-		JLabel lblPleaseChooseWhich = new JLabel("please choose which filters would you like to use and how:");
-		lblPleaseChooseWhich.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblPleaseChooseWhich.setBounds(12, 28, 692, 37);
-		contentPane.add(lblPleaseChooseWhich);
-
-		JCheckBox chckbxTimenotFilter = new JCheckBox("timeNot filter");
-		chckbxTimenotFilter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				okNot1 = true;
-				ok1 = false;
-			}
-		});
-		chckbxTimenotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		chckbxTimenotFilter.setBounds(12, 184, 166, 29);
-		contentPane.add(chckbxTimenotFilter);
-
-		JCheckBox chckbxIdnotFilter = new JCheckBox("IDNot filter");
-		chckbxIdnotFilter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				okNot2 = true;
-				ok2 = false;
-			}
-		});
-		chckbxIdnotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		chckbxIdnotFilter.setBounds(188, 190, 149, 25);
-		contentPane.add(chckbxIdnotFilter);
-
-		JCheckBox chckbxRadiusnotFilter = new JCheckBox("radiusNot filter");
-		chckbxRadiusnotFilter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				okNot4 = true;
-				ok4 = false;
-			}
-		});
-		chckbxRadiusnotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		chckbxRadiusnotFilter.setBounds(553, 190, 186, 25);
-		contentPane.add(chckbxRadiusnotFilter);
-
-		JCheckBox chckbxLocationnotFilter = new JCheckBox("locationNot filter");
-		chckbxLocationnotFilter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				okNot3 = true;
-				ok3 = false;
-			}
-		});
-		chckbxLocationnotFilter.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		chckbxLocationnotFilter.setBounds(344, 188, 198, 25);
-		contentPane.add(chckbxLocationnotFilter);
-
-		JLabel lblNoteYouCant = new JLabel("NOTE: you can't choose the same filter in two different ways, ");
-		lblNoteYouCant.setFont(new Font("Tahoma", Font.ITALIC, 22));
-		lblNoteYouCant.setBounds(12, 66, 645, 29);
-		contentPane.add(lblNoteYouCant);
-
-		JLabel lblForExampleTime = new JLabel("for example- time + timeNot");
-		lblForExampleTime.setFont(new Font("Tahoma", Font.ITALIC, 22));
-		lblForExampleTime.setBounds(12, 96, 470, 29);
-		contentPane.add(lblForExampleTime);
-
-	}
-}
+ */

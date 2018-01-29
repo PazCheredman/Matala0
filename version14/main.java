@@ -1,6 +1,7 @@
 package version14;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -55,10 +56,11 @@ public class main {
 	 * option A -enter file name .csv and it will show you the accurate location by the whole row.
 	 * option B- enter 3 pairs of mac and signal and it will show you the accurate location by these pairs.
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
 
 
-	public void algorithm2OptionA(String path, String pathAll,String pathMiss) throws IOException{
+	public void algorithm2OptionA(String path, String pathAll,String pathMiss) throws IOException, SQLException{
 		//EX2:algorithm2OptionA
 		MacSignalContainer msc= new MacSignalContainer(path);
 		outputTable data =new outputTable();
@@ -87,7 +89,7 @@ public class main {
 	}
 
 
-	public void algorithm2OptionB(String path,String mac1,String signal1,String mac2,String signal2,String mac3,String signal3) throws IOException{
+	public void algorithm2OptionB(String path,String mac1,String signal1,String mac2,String signal2,String mac3,String signal3) throws IOException, SQLException{
 		//EX2:algorithm2OptionB
 		List<String> macs = new ArrayList<>();
 		List<Double> signals = new ArrayList<>();
@@ -115,7 +117,7 @@ public class main {
 	}
 
 
-	public void radius(String path, String lat1, String lon1, String alt1, String rad1, boolean NotFilter) throws IOException{
+	public void radius(String path, String lat1, String lon1, String alt1, String rad1, boolean NotFilter) throws IOException, SQLException{
 		//EX1: Algorithm3- searchByRadious
 		String sub= path.substring(0, path.length()-9);
 		Algorithm3 searchRad =new Algorithm3();
@@ -140,7 +142,7 @@ public class main {
 		else{
 			outputTable output= searchRad.searchByRadiousNot(lat, lon, alt, radious);
 			if(output.size()>0){
-				String sub= path.substring(0, path.length()-9);
+				String sub1= path.substring(0, path.length()-9);
 				String file= sub+"\\radNOT.csv";
 				output.write(file);
 			}
@@ -155,9 +157,10 @@ public class main {
 	/**
 	 * filter searches by range location inserted in the csv gmon and outputs a new csv
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
 	public void location(String path, String latmin, String lonmin, String altmin,
-			String latmax, String lonmax, String altmax, boolean NotFilter) throws IOException{
+			String latmax, String lonmax, String altmax, boolean NotFilter) throws IOException, SQLException{
 		//EX3: Algorithm3- searchBylocation
 		Algorithm3 searchRad =new Algorithm3();
 		outputTable tbl =new outputTable();
@@ -199,8 +202,9 @@ public class main {
 	/**
 	 * filter searches by id inserted in the csv gmon and outputs a new csv and kml
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
-	public void id(String path, String id, boolean NotFilter) throws IOException{
+	public void id(String path, String id, boolean NotFilter) throws IOException, SQLException{
 		//EX1: Algorithm3- searchByID
 		Algorithm3 searchId =new Algorithm3();
 		outputTable tbl =new outputTable();
@@ -234,8 +238,10 @@ public class main {
 	/**
 	 * filter searches by time inserted in the csv gmon and outputs a new csv and kml
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
-	public void time(String path,String timeMin,String timeMax, boolean NotFilter) throws IOException{
+	
+	public void time(String path,String timeMin,String timeMax, boolean NotFilter) throws IOException, SQLException{
 		//EX3: Algorithm3- searchByTime
 		Algorithm3 searchTime =new Algorithm3();
 		outputTable tbl =new outputTable();

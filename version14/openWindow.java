@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -63,7 +64,7 @@ public class openWindow {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 228, 225));
-		frame.setBounds(100, 100, 885, 481);
+		frame.setBounds(100, 100, 815, 429);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -71,17 +72,17 @@ public class openWindow {
 		lblWelcomeToOur.setForeground(Color.RED);
 		lblWelcomeToOur.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblWelcomeToOur.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcomeToOur.setBounds(131, 45, 508, 51);
+		lblWelcomeToOur.setBounds(122, 16, 508, 51);
 		frame.getContentPane().add(lblWelcomeToOur);
 		
 		enterPathWiggle = new JTextField();
-		enterPathWiggle.setBounds(131, 149, 461, 42);
+		enterPathWiggle.setBounds(141, 120, 461, 42);
 		frame.getContentPane().add(enterPathWiggle);
 		enterPathWiggle.setColumns(10);
 				
 		enterPathCsvKml = new JTextField();
 		enterPathCsvKml.setColumns(10);
-		enterPathCsvKml.setBounds(131, 259, 461, 42);
+		enterPathCsvKml.setBounds(141, 230, 461, 42);
 		frame.getContentPane().add(enterPathCsvKml);
 		
 		//databases data = new databases(enterPathWiggle.getText(),enterPathCsvKml.getText());
@@ -89,13 +90,13 @@ public class openWindow {
 		JLabel lblPleaseEnterPath = new JLabel("please enter path of folder that contains wiggle wifi application files:");
 		lblPleaseEnterPath.setForeground(Color.RED);
 		lblPleaseEnterPath.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPleaseEnterPath.setBounds(90, 95, 735, 36);
+		lblPleaseEnterPath.setBounds(72, 70, 735, 36);
 		frame.getContentPane().add(lblPleaseEnterPath);
 		
 		lblPleaseEnterPath_1 = new JLabel("please enter path of other folder that you want to put the csv and kml files in it");
 		lblPleaseEnterPath_1.setForeground(Color.RED);
 		lblPleaseEnterPath_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPleaseEnterPath_1.setBounds(72, 207, 735, 36);
+		lblPleaseEnterPath_1.setBounds(40, 178, 735, 36);
 		frame.getContentPane().add(lblPleaseEnterPath_1);
 		
 		btnNext = new JButton("next");
@@ -124,7 +125,7 @@ public class openWindow {
 				
 			}
 		});
-		btnNext.setBounds(303, 317, 142, 36);
+		btnNext.setBounds(273, 288, 142, 36);
 		frame.getContentPane().add(btnNext);
 	}
 
@@ -155,6 +156,4 @@ public class openWindow {
 	public JFrame getFrame(){
 		return frame;
 	}
-
-	
 }

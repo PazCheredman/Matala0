@@ -4,17 +4,57 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class outputTable {
 
+//	private String user= "oop1";
+//	private String password="Lambda1();";
+	private String ip=""; 
+	private int port=-1; 
+	private String username="";
+	private String password="";
+	private String database="";
+	private String tables="";
+	private String url= "jdbc:mysql://";
+	boolean sqlOkay=false; 
+	
 	/**
 	 * this class represents output csv table builder
 	 */
 
 	private ArrayList<outputRow> ls;
+
+	public String getUrl() {
+		return url;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setUrl(String ip, int port, String database) {
+		this.url +=ip +":"+ port+ "/"+database;
+	}
 
 	public outputTable() {
 		ls = new ArrayList<outputRow>();
@@ -42,7 +82,7 @@ public class outputTable {
 		ls.add(row);
 	}
 
-	public void read(String fileName, boolean head) {
+	public void read_file(String fileName, boolean head) {
 		ArrayList<String> temp = new ArrayList<String>();
 		try {
 			FileReader fr = new FileReader(fileName);
@@ -108,6 +148,57 @@ public class outputTable {
 		}
 	}
 
+	public void read_mysql() throws SQLException{
+		// get the connection to the database
+		Connection myConnection = DriverManager.getConnection(url,username,password);
+		//create a statement
+		Statement myState = myConnection.createStatement();
+		// execute SQL query
+		ResultSet myRes = myState.executeQuery("select * from ex4_db");
+		outputRow row = new outputRow();
+		//process the result set
+		while(myRes.next()){
+			String time = myRes.getString(2);
+			String id = myRes.getString(3);
+			String num;
+			double lat, lon, alt;
+			num = myRes.getString(4);
+			lat = Double.parseDouble(num);
+			num = myRes.getString(5);
+			lon = Double.parseDouble(num);
+			num = myRes.getString(6);
+			alt = Double.parseDouble(num);
+			row.set(time, id, lat, lon, alt);
+			int wifiCount = Integer.parseInt(myRes.getString(7));
+			for (int i = 0; i < wifiCount; i++) { // get mac from
+				// csv
+				String mac = myRes.getString(8+i*2);
+				String signalStr = myRes.getString(8 + i*2+1);
+				if (signalStr != null) {
+					double signal = Double.parseDouble(signalStr);
+					row.addWifi("x", mac, 0, signal);
+				}
+			}
+			add(row);
+		}
+
+	}
+
+	public void read(String filename, boolean head) throws SQLException{
+		read_file(filename,head);
+		read_mysql();
+	}
+	
+	public void setDataSql(String ip, int port, String username, String password,
+			String database, String table){
+		this.ip=ip;
+		this.port=port;
+		this.username=username;
+		this.password=password;
+		this.database=database;
+		this.tables=table;
+	}
+	
 	public void write(String filename) throws IOException {
 		/**
 		 * enter path name here format: "pathAddredd\\filename.csv"
@@ -123,7 +214,7 @@ public class outputTable {
 				",SSID8,MAC8,Frequncy8,Signal8,SSID9,MAC9,Frequncy9,Signal9"+
 				",SSID10,MAC10,Frequncy10,Signal10");
 		writer.write("\n");
-		
+
 		for (int i = 0; i < ls.size(); i++) {
 			outputRow row = ls.get(i);
 			if (row.getWifiCount() > 0) {
